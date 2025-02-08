@@ -19,5 +19,5 @@ export function calculateYearsSince(period: string) {
     yearsDiff--;
     monthsDiff += 12;
   }
-  return `${yearsDiff} years ${monthsDiff} months`;
+  return `${yearsDiff} years ${monthsDiff ? `${monthsDiff} months` : ``}`;
 }

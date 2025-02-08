@@ -1,0 +1,64 @@
+import type { MDXComponents } from 'mdx/types';
+import { ComponentProps } from 'react';
+
+export function getMDXComponents(): MDXComponents {
+  return {
+    h1: (props: ComponentProps<'h1'>) => (
+      <h1
+        className="my-4 text-3xl font-bold text-gray-900 dark:text-gray-200"
+        {...props}
+      />
+    ),
+    h2: (props: ComponentProps<'h2'>) => (
+      <h2
+        className="my-3 text-2xl font-semibold text-gray-900 dark:text-gray-200"
+        {...props}
+      />
+    ),
+    h3: (props: ComponentProps<'h3'>) => (
+      <h3
+        className="my-2 text-xl font-semibold text-gray-900 dark:text-gray-200"
+        {...props}
+      />
+    ),
+    h4: (props: ComponentProps<'h4'>) => (
+      <h4
+        className="my-1 text-lg font-medium text-gray-900 dark:text-gray-200"
+        {...props}
+      />
+    ),
+    p: (props: ComponentProps<'p'>) => (
+      <p className="my-2 text-gray-600 dark:text-gray-400" {...props} />
+    ),
+    ul: (props: ComponentProps<'ul'>) => (
+      <ul
+        className="my-4 list-inside list-disc text-gray-900 dark:text-gray-100"
+        {...props}
+      />
+    ),
+    li: (props: ComponentProps<'li'>) => (
+      <li className="my-1 text-gray-600 dark:text-gray-400" {...props} />
+    ),
+    code: (props: ComponentProps<'code'>) => (
+      <code
+        className="rounded bg-gray-200 px-1 font-mono text-red-600 dark:bg-gray-800 dark:text-red-400"
+        {...props}
+      />
+    ),
+    pre: (props: ComponentProps<'pre'>) => (
+      <pre
+        className="my-4 overflow-x-auto rounded bg-gray-900 p-4 text-white dark:bg-gray-700 dark:text-gray-200"
+        {...props}
+      />
+    ),
+    a: (props: ComponentProps<'a'>) => (
+      <a
+        className="text-blue-600 hover:underline dark:text-blue-400 dark:hover:text-blue-300"
+        {...props}
+      />
+    ),
+    img: (props: ComponentProps<'img'>) => (
+      <img className="my-4 rounded-lg shadow-lg" alt={props.alt} {...props} />
+    ),
+  };
+}

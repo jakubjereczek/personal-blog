@@ -20,8 +20,8 @@ export default function AboutPage() {
       </h2>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         Hi there! I&apos;m Jakub, a passionate software developer with{' '}
-        {calculateYearsSince(experiences[0].period.slice(0, 7))} commercial in
-        web development.
+        {calculateYearsSince(experiences[0].period.slice(0, 7))} commercial
+        experience in web development.
       </p>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         I specialize in front-end development, with a strong focus on React and

@@ -12,8 +12,8 @@ export default function Navigation() {
   const [darkMode, setDarkMode] = useDarkMode();
 
   return (
-    <nav className="fixed z-50 w-full bg-white shadow-sm dark:bg-gray-900">
-      <div className="mx-auto max-w-3xl px-4">
+    <nav className="fixed z-50 w-full bg-opacity-80 shadow-sm backdrop-blur-sm dark:bg-opacity-80">
+      <div className="mx-auto max-w-4xl px-4">
         <div className="flex h-16 items-center justify-between">
           <Link
             href="/"

@@ -8,17 +8,19 @@ export const navItems: NavItem[] = [
   { name: 'About', href: '/about' },
 ];
 
-export interface Article {
-  id: number;
+export type ArticleMetadata = {
   title: string;
+  description: string;
   date: string;
-  tags: string[];
-  parameters: {
-    external?: string;
-    views?: number;
-  };
-  content?: string;
-}
+  tags?: string[];
+  external?: string;
+};
+
+export type Article = {
+  metadata: ArticleMetadata;
+  content: string;
+  slug: string;
+};
 
 export interface Experience {
   period: string;

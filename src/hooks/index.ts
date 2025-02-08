@@ -1,3 +1,3 @@
-import useDarkMode from '@/hooks/useDarkmode';
+import useDarkMode from '@/hooks/use-darkmode';
 
 export { useDarkMode };
