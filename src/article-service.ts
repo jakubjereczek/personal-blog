@@ -37,16 +37,22 @@ export default class ArticleService {
         }
         return undefined;
       })
-      .filter((article) => article?.metadata) as Article[];
+      .filter(
+        (article) => article !== undefined && article.metadata,
+      ) as Article[];
   }
 
   static getArticlesNames(): string[] {
-    const filenames = fs.readdirSync(this.directory);
-    const slugs = filenames
-      .filter((filename) => filename.endsWith('.mdx'))
-      .map((filename) => filename.replace(/\.mdx$/, ''));
+    try {
+      const filenames = fs.readdirSync(this.directory);
+      const slugs = filenames
+        .filter((filename) => filename.endsWith('.mdx'))
+        .map((filename) => filename.replace(/\.mdx$/, ''));
 
-    return slugs;
+      return slugs;
+    } catch {
+      return [];
+    }
   }
 
   private static parseMarkdown(source: string) {
