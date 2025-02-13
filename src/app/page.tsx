@@ -94,6 +94,21 @@ export const metadata: Metadata = {
     description:
       'The blog covers web development topics, including front-end, full-stack, JavaScript, and more. It features practical tips, discussions on modern technologies, and insights from real-world projects. Whether you are a beginner or an experienced developer, you will find valuable guidance and inspiration.',
     siteName: 'jakubjereczek.com',
+    images: [
+      {
+        url: 'https://jakubjereczek.com/icons_set/og.png',
+        width: 1200,
+        height: 630,
+        alt: 'jakubjereczek.com Open Graph Image',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'jakubjereczek.com',
+    description:
+      'The blog covers web development topics, including front-end, full-stack, JavaScript, and more. It features practical tips, discussions on modern technologies, and insights from real-world projects.',
+    images: 'https://jakubjereczek.com/icons_set/og.png',
   },
 };
 

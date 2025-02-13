@@ -1,6 +1,7 @@
 'use client';
 
 import { Moon, Sun } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -15,12 +16,22 @@ export default function Navigation() {
     <nav className="fixed z-50 w-full bg-opacity-80 shadow-sm backdrop-blur-sm dark:bg-opacity-80">
       <div className="mx-auto max-w-4xl px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link
-            href="/"
-            className="text-xl font-semibold text-gray-900 dark:text-white"
-          >
-            jakubjereczek.com
-          </Link>
+          <div>
+            <Link
+              href="/"
+              className="flex items-center gap-4 text-xl font-semibold text-gray-900 dark:text-white"
+            >
+              <Image
+                src={'/icons_set/logo_mono.svg'}
+                width={48}
+                height={48}
+                alt={'jakubjereczek.com Logo'}
+                className="rounded-lg"
+              />
+              jakubjereczek.com
+            </Link>{' '}
+          </div>
+
           <ul className="flex items-center space-x-4 text-sm font-medium">
             {navItems.map((item) => (
               <li key={item.href}>
