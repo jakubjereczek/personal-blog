@@ -27,9 +27,9 @@ export default function AboutPage() {
         I specialize in front-end development, with a strong focus on React and
         Next.js. Additionally, I am expanding my expertise in backend
         technologies like Node.js and Nest.js. I primarily work within the
-        JavaScript ecosystem, although I also have some experience with Java and
-        C# (not commercial). I love creating user-friendly interfaces and
-        solving complex problems with clean, efficient code.
+        JavaScript ecosystem, although I also have some experience with other
+        stuffs. I love creating user-friendly interfaces and solving complex
+        problems with clean, efficient code.
       </p>
       <p className="mb-4 text-gray-600 dark:text-gray-400">
         This blog is my platform to share insights, thoughts on web development,
