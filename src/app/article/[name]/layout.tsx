@@ -19,6 +19,7 @@ function generateJsonLd(article: Article | undefined) {
       ...(article.metadata.tags && {
         keywords: article.metadata.tags.join(', '),
       }),
+      image: `https://jakubjereczek.com/articles/images/${article.slug}-dark.png`,
     };
   }
   return {};
