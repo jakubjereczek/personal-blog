@@ -29,13 +29,13 @@ export async function generateMetadata({
         tags: article.metadata.tags?.join(', ') || '',
         images: [
           {
-            url: `/articles/images/${article.slug}.png`,
+            url: `https://jakubjereczek.com/articles/images/${article.slug}.png`,
             width: 2400,
             height: 1260,
             alt: article.metadata.title || 'Article Image',
           },
           {
-            url: `/articles/images/${article.slug}-dark.png`,
+            url: `https://jakubjereczek.com/articles/images/${article.slug}-dark.png`,
             width: 2400,
             height: 1260,
             alt: article.metadata.title || 'Article Image',
@@ -46,13 +46,13 @@ export async function generateMetadata({
         card: 'summary_large_image',
         images: [
           {
-            url: `/articles/images/${article.slug}.png`,
+            url: `https://jakubjereczek.com/articles/images/${article.slug}.png`,
             width: 2400,
             height: 1260,
             alt: article.metadata.title || 'Article Image',
           },
           {
-            url: `/articles/images/${article.slug}-dark.png`,
+            url: `https://jakubjereczek.com/articles/images/${article.slug}-dark.png`,
             width: 2400,
             height: 1260,
             alt: article.metadata.title || 'Article Image',
