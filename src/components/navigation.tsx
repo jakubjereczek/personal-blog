@@ -19,16 +19,16 @@ export default function Navigation() {
           <div>
             <Link
               href="/"
-              className="flex items-center gap-4 text-xl font-semibold text-gray-900 dark:text-white"
+              className="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white"
             >
               <Image
                 src={'/icons_set/logo_mono.svg'}
-                width={48}
-                height={48}
+                width={36}
+                height={36}
                 alt={'jakubjereczek.com Logo'}
-                className="rounded-lg"
+                className="rounded-sm"
               />
-              jakubjereczek.com
+              <span className="hidden md:block">jakubjereczek.com</span>
             </Link>{' '}
           </div>
 
