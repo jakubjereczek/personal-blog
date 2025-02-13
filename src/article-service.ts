@@ -29,17 +29,23 @@ export default class ArticleService {
   static getArticles(): Article[] {
     const slugs = this.getArticlesNames();
 
-    return slugs
-      .map((slug) => {
-        const article = this.getArticle(slug);
-        if (article) {
-          return { ...article, slug } as Article;
-        }
-        return undefined;
-      })
-      .filter(
-        (article) => article !== undefined && article.metadata,
-      ) as Article[];
+    return (
+      slugs
+        .map((slug) => {
+          const article = this.getArticle(slug);
+          if (article) {
+            return { ...article, slug } as Article;
+          }
+          return undefined;
+        })
+        .filter(
+          (article) => article !== undefined && article.metadata,
+        ) as Article[]
+    ).sort(
+      (a, b) =>
+        new Date(b.metadata.date).getTime() -
+        new Date(a.metadata.date).getTime(),
+    );
   }
 
   static getArticlesNames(): string[] {
