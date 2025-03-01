@@ -19,16 +19,26 @@ export default function Navigation() {
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white"
+              className="group flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white"
             >
-              <Image
-                src={`/icons_set/${darkMode ? 'logo_mono_white.svg' : 'logo_mono.svg'}`}
-                width={36}
-                height={36}
-                alt={'jakubjereczek.com Logo'}
-              />
+              <div className="relative h-9 w-9">
+                <Image
+                  src={`/icons_set/${darkMode ? 'logo_mono_white.svg' : 'logo_mono.svg'}`}
+                  width={36}
+                  height={36}
+                  alt="Logo"
+                  className="absolute"
+                />
+                <Image
+                  src={`/icons_set/bulb.svg`}
+                  width={36}
+                  height={36}
+                  alt="Logo Hover"
+                  className="absolute opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100"
+                />
+              </div>
               <span className="hidden md:block">jakubjereczek.com</span>
-            </Link>{' '}
+            </Link>
           </div>
 
           <ul className="flex items-center space-x-4 text-sm font-medium">
