@@ -22,11 +22,10 @@ export default function Navigation() {
               className="flex items-center gap-2 text-xl font-semibold text-gray-900 dark:text-white"
             >
               <Image
-                src={'/icons_set/logo_mono.svg'}
+                src={`/icons_set/${darkMode ? 'logo_mono_white.svg' : 'logo_mono.svg'}`}
                 width={36}
                 height={36}
                 alt={'jakubjereczek.com Logo'}
-                className="rounded-sm"
               />
               <span className="hidden md:block">jakubjereczek.com</span>
             </Link>{' '}
