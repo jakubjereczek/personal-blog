@@ -17,6 +17,7 @@ function generateJsonLd(articles: Article[]) {
     author: {
       '@type': 'Person',
       name: 'Jakub Jereczek',
+      url: 'https://jakubjereczek.com/about',
     },
     keywords: [
       'web development',
@@ -46,28 +47,28 @@ function generateJsonLd(articles: Article[]) {
     },
     mainEntity: {
       '@type': 'ItemList',
-      name: 'List of articles',
-      itemListElement: articles.map((article, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        item: {
-          '@type': 'Article',
-          headline: article.metadata.title,
-          description: article.metadata.description,
-          url: `https://jakubjereczek.com/article/${article.slug}`,
-          datePublished: article.metadata.date,
-          dateModified: article.metadata.date,
-          author: {
-            '@type': 'Person',
-            name: 'Jakub Jereczek',
+      name: 'Articles',
+      itemListElement: articles
+        .filter((article) => !article.metadata.external)
+        .map((article, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          item: {
+            '@type': 'BlogPosting',
+            headline: article.metadata.title,
+            description: article.metadata.description,
+            url: `https://jakubjereczek.com/article/${article.slug}`,
+            datePublished: article.metadata.date,
+            dateModified: article.metadata.date,
+            author: {
+              '@type': 'Person',
+              name: 'Jakub Jereczek',
+              url: 'https://jakubjereczek.com/about',
+            },
+            keywords: article.metadata.tags || [],
+            mainEntityOfPage: `https://jakubjereczek.com/article/${article.slug}`,
           },
-          keywords: article.metadata.tags || [],
-          mainEntityOfPage: {
-            '@type': 'WebPage',
-            '@id': `https://jakubjereczek.com/article/${article.slug}`,
-          },
-        },
-      })),
+        })),
     },
   };
 }
