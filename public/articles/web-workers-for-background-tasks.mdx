@@ -1,0 +1,196 @@
+---
+title: 'Web Workers for Background Tasks'
+description: 'Web Workers can boost JavaScript performance by running tasks in the background without blocking the main thread.'
+date: '2025-03-01T15:15:00Z'
+author: 'Jakub Jereczek'
+tags:
+  - Web Workers
+  - Performance
+  - Multithreading
+  - Concurrency
+  - WebAPI
+---
+
+# Enhance JavaScript Performance with Web Workers
+
+## What exactly is a Web Worker?
+
+I think everyone has encountered the issue of JavaScript's single-threaded nature in web browsers. When performing operations that require expensive calculations, the issue of blocking the main thread often arises, which results in a slow or temporarily frozen user interface.
+
+One way to deal with this problem could be multi-threaded processing in the background. Web Worker is a mechanism that allows running code in a separate thread, in what is known as a worker thread, allowing the main thread to stay responsive.
+
+## How does it work?
+
+Based on [CanIUse.com](https://caniuse.com/webworkers) metrics, Web Workers have been supported for years and are currently available in 97.7% of browsers. They work in every modern browser.
+
+To create a new Worker, which is a separate thread that will run the script contained in a file, you need to use the constructor, providing the file path as an argument.
+`const worker = new Worker('worker.js');`
+
+Communication between the Worker thread and the main thread takes place through a message-passing mechanism, It allows sending and listening for messages. It is asynchronous.
+
+```js title="main.js"
+const worker = new Worker('worker.js');
+
+worker.postMessage('Hello Worker!');
+
+worker.onmessage = function(event) {
+  console.log('Received from Worker', event.data);
+}
+```
+
+```js title="worker.js"
+onmessage = function (event) {
+  console.log('Received from Main Thread', event.data);
+  postMessage('Hello Main Thread!');
+};
+```
+
+### Use case
+
+This code is a concise example showcasing the key Web Worker API methods and properties. It demonstrates how to use a Web Worker to handle computationally intensive tasks in the background, ensuring the main thread remains responsive.
+This code uses a Web Worker to generate random numbers and find the most common one.
+
+```js title="main.js"
+let worker;
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (!window.Worker) {
+    console.warn('Web Workers are not supported in this browser.');
+    return;
+  }
+
+  worker = new Worker('worker.js');
+
+  worker.onmessage = (event) => {
+    const message = event.data;
+    const { commonNumber, occurs } = message.data;
+
+    if (message.type === 'result') {
+      document.getElementById('output').innerText =
+        `Most common number: ${commonNumber} (occurs ${occurs} times)`;
+    } else if (message.type === 'error') {
+      console.error('Worker internal error: ', message.message);
+    }
+  };
+
+  worker.onerror = (error) => {
+    console.error('Worker error: ', error.message);
+  };
+
+  worker.postMessage({ type: 'calculate', count: 500000, range: 500 });
+});
+
+window.addEventListener('beforeUnload', () => {
+  if (worker) {
+    worker.terminate();
+    worker = null;
+  }
+});
+```
+
+```js title="worker.js"
+onmessage = function (event) {
+  try {
+    if (event.data.type === 'calculate') {
+      importScripts(
+        'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js',
+      );
+
+      let numbers = _.times(event.data.count, () => _.random(1, event.data.range));
+      let mostCommon = _.chain(numbers).countBy().toPairs().maxBy(1).value();
+
+      postMessage({
+        type: 'result',
+        data: {
+          commonNumber: Number(mostCommon[0]),
+          occurs: mostCommon[1],
+        },
+      });
+    } else {
+      throw new Error('Unknown message type');
+    }
+  } catch (error) {
+    postMessage({ type: 'error', message: error.message });
+  }
+};
+```
+
+In my repository, I have prepared a complete example and a comparison of how the browser behaves when performing calculations in a Web Worker versus the main thread. My code shows how running computations in the main thread can freeze the UI, making the browser unresponsive, while using a Web Worker keeps everything smooth and interactive.
+
+[Try it out](https://github.com/jakubjereczek/personal-blog-web-workers).
+
+## Thread sharing
+
+A Shared Worker is a Web Worker that lets multiple scripts from the same domain use the same worker thread. It can be accessed across different tabs, windows (or even iframes) as long they belong to the same domain.
+
+Communication in a Shared Worker takes place via MessagePort, each new client connects though its own port. 
+
+```js title="main.js"
+const sharedWorker = new SharedWorker('shared-worker.js');
+
+sharedWorker.port.start(); 
+
+sharedWorker.port.postMessage('Hello Shared Worker (from main)!');
+
+sharedWorker.port.onmessage = function(event) {
+  console.log('Received from Shared Worker:', event.data);
+};
+```
+
+```js title="main2.js"
+const sharedWorker = new SharedWorker('shared-worker.js');
+
+sharedWorker.port.start();
+
+sharedWorker.port.postMessage('Hello Shared Worker (from main2)!');
+
+sharedWorker.port.onmessage = function(event) {
+  console.log('Received from Shared Worker:', event.data);
+};
+```
+
+```js title="shared-worker.js"
+// Array to store all connected client ports.
+const ports = []; 
+
+onconnect = function(event) {
+  const port = event.ports[0];
+  ports.push(port); 
+
+  port.onmessage = function(event) {
+    console.log('Received from Main Thread:', event.data);
+    
+    // Reply only to the sender.
+    port.postMessage('Hello from Shared Worker!');
+    
+    // Broadcast message to all other connected clients.
+    ports.forEach(p => {
+      if (p !== port) {
+        p.postMessage('New message received from another client!');
+      }
+    });
+  };
+
+  port.start(); 
+};
+```
+
+## What are the capabilities of Web Workers?
+
+A Web Worker does not have access to the global window object. Instead, it has its own dedicated object, self, which serves as its global context.
+
+Nevertheless, Web Workers have many capabilities. Even though the Web API is limited, we still have access to many basic and advanced browser features, including: 
+* Networking, e.g. Fetch API, WebSocket API,
+* Data Storage, e.g. IndexedDB, File API,
+* Graphics Processing, e.g. Canvas API, WebGL API.
+
+It's crucial to remember that we do not have access to the DOM.
+
+The full list of available functions can be found in the [Mozilla Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Functions_and_classes_available_to_workers).
+
+
+## Outro
+
+Web Workers speed up JavaScript by running tasks in the background without blocking the main thread. If that wasn't enough for you, the topic is covered in detail in the [Mozilla Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API).
+
+Just a reminder that a full example is available in [my repository](https://github.com/jakubjereczek/personal-blog-web-workers).
