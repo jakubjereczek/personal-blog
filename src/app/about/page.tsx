@@ -41,7 +41,7 @@ export default function AboutPage() {
         <a
           href="https://github.com/jakubjereczek"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow"
           className="text-blue-600 hover:underline dark:text-blue-400"
         >
           GitHub
@@ -49,7 +49,7 @@ export default function AboutPage() {
         <a
           href="https://linkedin.com/in/jakubjereczek"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener noreferrer nofollow"
           className="text-blue-600 hover:underline dark:text-blue-400"
         >
           LinkedIn

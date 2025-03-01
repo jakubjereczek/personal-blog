@@ -54,7 +54,7 @@ function generateJsonLd(articles: Article[]) {
           '@type': 'ListItem',
           position: index + 1,
           item: {
-            '@type': 'BlogPosting',
+            '@type': 'Article',
             headline: article.metadata.title,
             description: article.metadata.description,
             url: `https://jakubjereczek.com/article/${article.slug}`,

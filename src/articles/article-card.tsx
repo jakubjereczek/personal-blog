@@ -23,6 +23,7 @@ export default function ArticleCard({
       <Link
         href={article.metadata.external || `/article/${article.slug}`}
         className="group block pb-2"
+        rel={article.metadata.external ? 'nofollow' : 'dofollow'}
       >
         <div className="flex flex-col space-y-1">
           <time className="font-mono text-sm text-gray-500 dark:text-gray-400">
