@@ -37,7 +37,9 @@ export default function ArticleContent({
 
   return (
     <div className="flex flex-row">
-      <article ref={ref}>{children}</article>
+      <article className="min-w-0 flex-grow overflow-x-auto" ref={ref}>
+        {children}
+      </article>
       <aside className="relative ml-8 hidden w-64 shrink-0 lg:block">
         <div className="sticky top-24">
           <h2 className="my-4 text-xl font-semibold text-gray-900 dark:text-white">
