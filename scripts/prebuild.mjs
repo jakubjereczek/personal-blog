@@ -4,7 +4,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import sharp from 'sharp';
 
-const MAX_LENGTH = 26;
+const MAX_LENGTH = 24;
 
 function splitText(text) {
   const words = text.split(' ');
