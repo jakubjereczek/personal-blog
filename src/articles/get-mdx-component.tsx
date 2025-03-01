@@ -1,5 +1,7 @@
 import type { MDXComponents } from 'mdx/types';
 import { ComponentProps } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 export function getMDXComponents(): MDXComponents {
   return {
@@ -40,14 +42,16 @@ export function getMDXComponents(): MDXComponents {
       <li className="my-1 text-gray-600 dark:text-gray-400" {...props} />
     ),
     code: (props: ComponentProps<'code'>) => (
-      <code
-        className="rounded bg-gray-200 px-1 font-mono text-red-600 dark:bg-gray-800 dark:text-red-400"
+      // @ts-expect-error Invalid type definition.
+      <SyntaxHighlighter
+        language={props.className?.replace(/language-/, '') ?? 'ts'}
         {...props}
+        style={vscDarkPlus}
       />
     ),
     pre: (props: ComponentProps<'pre'>) => (
       <pre
-        className="my-4 overflow-x-auto rounded bg-gray-900 p-4 text-white dark:bg-gray-700 dark:text-gray-200"
+        className="my-4 overflow-x-auto rounded bg-gray-900 p-2 text-white dark:bg-gray-700 dark:text-gray-200"
         {...props}
       />
     ),
