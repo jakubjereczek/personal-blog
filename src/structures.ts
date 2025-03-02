@@ -1,11 +1,14 @@
+import { Home, LucideIcon, User2 } from 'lucide-react';
+
 interface NavItem {
   name: string;
   href: string;
+  Icon: LucideIcon;
 }
 
 export const navItems: NavItem[] = [
-  { name: 'Blog', href: '/' },
-  { name: 'About me', href: '/about' },
+  { name: 'Blog', href: '/', Icon: Home },
+  { name: 'About me', href: '/about', Icon: User2 },
 ];
 
 export type ArticleMetadata = {

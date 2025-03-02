@@ -22,7 +22,7 @@ export default function AboutPage() {
         <div className="space-y-6">
           {experiences.map((exp, index) => (
             <div
-              key={index}
+              key={hashKey(`tag-${exp.company}-${index}`)}
               className="grid grid-cols-[100px,1fr] items-baseline gap-4"
             >
               <div className="text-sm text-gray-500 dark:text-gray-400">

@@ -4,7 +4,9 @@ import { motion } from 'framer-motion';
 import { Clock, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
+import Hint from '@/components/hint';
 import { Article } from '@/structures';
+import { hashKey } from '@/utils/string';
 import { isRecent30DaysDate } from '@/utils/time';
 
 export default function ArticleCard({
@@ -33,46 +35,46 @@ export default function ArticleCard({
               year: 'numeric',
             })}
           </time>
-          <h2 className="flex flex-wrap items-center gap-2 text-xl font-semibold text-gray-900 group-hover:text-gray-600 dark:text-white dark:group-hover:text-gray-300">
+          <h2 className="block flex flex-wrap items-center gap-2 text-xl font-semibold text-gray-900 group-hover:text-gray-600 dark:text-white dark:group-hover:text-gray-300">
             <span>{article.metadata.title}</span>
             {isRecent30DaysDate(article.metadata.date) && (
-              <span className="group/tooltip relative inline-flex items-center">
-                <Sparkles
-                  size={14}
-                  className="text-green-500 dark:text-green-400"
-                />
-                <span className="invisible absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white group-hover/tooltip:visible dark:bg-gray-800">
-                  New
-                </span>
-              </span>
+              <Hint
+                position="top"
+                label="New"
+                size={14}
+                Icon={Sparkles}
+                className="text-green-500 dark:text-green-400"
+              />
             )}
-            {article.content && article.content.length < 600 && (
-              <span className="group/tooltip relative inline-flex items-center">
-                <Clock size={14} className="text-blue-500 dark:text-blue-400" />
-                <span className="invisible absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap rounded bg-gray-900 px-2 py-1 text-xs text-white group-hover/tooltip:visible dark:bg-gray-800">
-                  Short read
-                </span>
-              </span>
+            {article.content && article.content.length < 6000 && (
+              <Hint position="top" label="Short read" size={14} Icon={Clock} />
             )}
             {article.metadata.external && (
-              <span className="text-xs font-normal text-green-600 dark:text-green-400">
-                [external]
-              </span>
+              <Hint
+                position="top"
+                label="Available on external platform"
+                size={14}
+                Component={
+                  <span className="text-xs font-normal text-green-600 dark:text-green-400">
+                    [external]
+                  </span>
+                }
+              />
             )}
           </h2>
-          <p className="line-clamp-2 text-gray-600 dark:text-gray-400">
-            {article.metadata.description}
-          </p>
-          <div className="flex flex-wrap gap-2 pt-1">
+          <div className="flex flex-wrap gap-2 py-2">
             {(article.metadata.tags || []).map((tag, index) => (
               <span
-                key={index}
-                className="inline-flex items-center rounded bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                key={hashKey(`tag-${tag}-${index}`)}
+                className="inline-flex rounded bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
               >
                 {tag}
               </span>
             ))}
           </div>
+          <p className="line-clamp-3 text-gray-600 dark:text-gray-400">
+            {article.metadata.description}
+          </p>
         </div>
       </Link>
     </motion.div>

@@ -3,15 +3,15 @@
 import { Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
+import NavigationItem from '@/components/navigation-item';
 import { getSiteConfig } from '@/config/site';
 import { useDarkMode } from '@/hooks';
 import { navItems } from '@/structures';
+import { hashKey } from '@/utils/string';
 
 export default function Navigation() {
   const { name } = getSiteConfig();
-  const pathname = usePathname();
   const [darkMode, setDarkMode] = useDarkMode();
 
   return (
@@ -42,26 +42,20 @@ export default function Navigation() {
               <span className="hidden md:block">{name}</span>
             </Link>
           </div>
-          <ul className="flex items-center space-x-4 text-sm font-medium">
+          <ul className="flex items-center gap-x-2">
             {navItems.map((item) => (
-              <li key={item.href}>
-                <Link
+              <li key={hashKey(`nav-${item.href}`)}>
+                <NavigationItem
                   href={item.href}
-                  className={`hover:text-blue-600 hover:underline dark:hover:text-blue-400 ${
-                    pathname === item.href
-                      ? 'text-blue-600 underline dark:text-blue-400'
-                      : 'text-gray-700 dark:text-gray-300'
-                  }`}
-                >
-                  {item.name}
-                </Link>
+                  label={item.name}
+                  Icon={item.Icon}
+                />
               </li>
             ))}
-            <li>
+            <li key="nav-darkmode">
               <button
                 onClick={() => setDarkMode((prev) => !prev)}
-                className="rounded-full bg-gray-200 p-2 text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-                aria-label={darkMode ? 'Light mode' : 'Dark mode'}
+                className="flex h-8 w-8 items-center justify-center text-gray-800 dark:text-gray-200"
               >
                 {darkMode ? <Sun size={16} /> : <Moon size={16} />}
               </button>
