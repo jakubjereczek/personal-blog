@@ -5,10 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { navItems } from '@/config/structures';
+import { getSiteConfig } from '@/config/site';
 import { useDarkMode } from '@/hooks';
+import { navItems } from '@/structures';
 
 export default function Navigation() {
+  const { name } = getSiteConfig();
   const pathname = usePathname();
   const [darkMode, setDarkMode] = useDarkMode();
 
@@ -37,10 +39,9 @@ export default function Navigation() {
                   className="absolute opacity-0 transition-all duration-300 ease-in-out group-hover:opacity-100"
                 />
               </div>
-              <span className="hidden md:block">jakubjereczek.com</span>
+              <span className="hidden md:block">{name}</span>
             </Link>
           </div>
-
           <ul className="flex items-center space-x-4 text-sm font-medium">
             {navItems.map((item) => (
               <li key={item.href}>

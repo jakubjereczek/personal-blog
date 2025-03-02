@@ -1,7 +1,10 @@
-import ArticleService from '@/article-service';
-import { Article } from '@/config/structures';
+import { getSiteConfig } from '@/config/site';
+import ArticleService from '@/lib/article-service';
+import { Article } from '@/structures';
 
 function generateJsonLd(article: Article | undefined) {
+  const { author, url } = getSiteConfig();
+
   if (article) {
     return {
       '@context': 'https://schema.org',
@@ -12,14 +15,15 @@ function generateJsonLd(article: Article | undefined) {
       dateModified: article.metadata.date,
       author: {
         '@type': 'Person',
-        name: 'Jakub Jereczek',
+        name: author,
+        url: `${url}/about`,
       },
-      url: `https://jakubjereczek.com/article/${article.slug}`,
-      mainEntityOfPage: `https://jakubjereczek.com/article/${article.slug}`,
+      url: `${url}/article/${article.slug}`,
+      mainEntityOfPage: `${url}/article/${article.slug}`,
       ...(article.metadata.tags && {
         keywords: article.metadata.tags.join(', '),
       }),
-      image: `https://jakubjereczek.com/articles/images/${article.slug}-dark.png`,
+      image: `${url}/articles/images/${article.slug}-dark.png`,
     };
   }
   return {};

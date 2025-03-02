@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import TableOfContents from '@/articles/article-table-of-contents';
+import TableOfContents from '@/components/article-table-of-contents';
 
 export interface Heading {
   id: string;

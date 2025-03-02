@@ -2,9 +2,10 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import ArticleService from '@/article-service';
-import ArticleContent from '@/articles/article-content';
-import MDXRemoteRenderer from '@/articles/mdx-remote-renderer';
+import ArticleContent from '@/components/article-content';
+import MDXRemoteRenderer from '@/components/mdx-remote-renderer';
+import { getSiteConfig } from '@/config/site';
+import ArticleService from '@/lib/article-service';
 
 export async function generateMetadata({
   params,
@@ -13,6 +14,7 @@ export async function generateMetadata({
 }): Promise<Metadata | undefined> {
   const { name } = await params;
   const article = ArticleService.getArticle(name);
+  const { url } = getSiteConfig();
 
   if (article) {
     return {
@@ -23,22 +25,20 @@ export async function generateMetadata({
         description: article.metadata.description,
         type: 'article',
         publishedTime: article.metadata.date,
-        url:
-          article.metadata.external ||
-          `https://jakubjereczek.com/article/${article.slug}`,
+        url: `${url}/article/${article.slug}`,
         tags: article.metadata.tags?.join(', ') || '',
         images: [
           {
-            url: `https://jakubjereczek.com/articles/images/${article.slug}.png`,
+            url: `${url}/articles/images/${article.slug}-dark.png`,
             width: 2400,
             height: 1260,
-            alt: article.metadata.title || 'Article Image',
+            alt: `${article.metadata.title} Article Dark Image`,
           },
           {
-            url: `https://jakubjereczek.com/articles/images/${article.slug}-dark.png`,
+            url: `${url}/articles/images/${article.slug}.png`,
             width: 2400,
             height: 1260,
-            alt: article.metadata.title || 'Article Image',
+            alt: `${article.metadata.title} Article Image`,
           },
         ],
       },
@@ -46,16 +46,16 @@ export async function generateMetadata({
         card: 'summary_large_image',
         images: [
           {
-            url: `https://jakubjereczek.com/articles/images/${article.slug}.png`,
+            url: `${url}/articles/images/${article.slug}-dark.png`,
             width: 2400,
             height: 1260,
-            alt: article.metadata.title || 'Article Image',
+            alt: `${article.metadata.title} Article Dark Image`,
           },
           {
-            url: `https://jakubjereczek.com/articles/images/${article.slug}-dark.png`,
+            url: `${url}/articles/images/${article.slug}.png`,
             width: 2400,
             height: 1260,
-            alt: article.metadata.title || 'Article Image',
+            alt: `${article.metadata.title} Article Image`,
           },
         ],
       },
@@ -101,7 +101,6 @@ export default async function ArticlePage({
           className="hidden dark:block"
         />
       </div>
-
       <MDXRemoteRenderer source={article.content} />
     </ArticleContent>
   );

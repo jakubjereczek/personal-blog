@@ -1,16 +1,5 @@
-import { Experience } from '@/config/structures';
-import { calculateYearsSince } from '@/utils/time';
-
-const experiences: Experience[] = [
-  {
-    period: '07.2021 – now',
-    company: 'OKE Software',
-    role: 'Frontend developer',
-    color: '#0066FF',
-    description:
-      'Develop Smart TV project for the leading European provider of video and pay TV.',
-  },
-] as const;
+import { aboutMe, experiences } from '@/config/data';
+import { hashKey } from '@/utils/string';
 
 export default function AboutPage() {
   return (
@@ -18,43 +7,14 @@ export default function AboutPage() {
       <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-200">
         About me
       </h2>
-      <p className="mb-4 text-gray-600 dark:text-gray-400">
-        Hi there! I&apos;m Jakub, a passionate software developer with{' '}
-        {calculateYearsSince(experiences[0].period.slice(0, 7))} commercial
-        experience in web development.
-      </p>
-      <p className="mb-4 text-gray-600 dark:text-gray-400">
-        I specialize in front-end development, with a strong focus on React and
-        Next.js. Additionally, I am expanding my expertise in backend
-        technologies like Node.js and Nest.js. I primarily work within the
-        JavaScript ecosystem, although I also have some experience with other
-        stuffs. I love creating user-friendly interfaces and solving complex
-        problems with clean, efficient code.
-      </p>
-      <p className="mb-4 text-gray-600 dark:text-gray-400">
-        This blog is my platform to share insights, thoughts on web development,
-        trends and technology in general. I created this space to serve as a
-        reflection of my personal growth. I hope you find the content here
-        useful and inspiring. Feel free to reach out if you have any questions.
-      </p>
-      <div className="flex gap-4">
-        <a
-          href="https://github.com/jakubjereczek"
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          className="text-blue-600 hover:underline dark:text-blue-400"
+      {aboutMe.map((payload, index) => (
+        <p
+          key={hashKey(`about-me-${index}`)}
+          className="mb-4 text-gray-600 dark:text-gray-400"
         >
-          GitHub
-        </a>
-        <a
-          href="https://linkedin.com/in/jakubjereczek"
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          className="text-blue-600 hover:underline dark:text-blue-400"
-        >
-          LinkedIn
-        </a>
-      </div>
+          {payload}
+        </p>
+      ))}
       <div className="mt-16">
         <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
           Experience

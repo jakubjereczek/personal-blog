@@ -5,7 +5,7 @@ interface NavItem {
 
 export const navItems: NavItem[] = [
   { name: 'Blog', href: '/' },
-  { name: 'About', href: '/about' },
+  { name: 'About me', href: '/about' },
 ];
 
 export type ArticleMetadata = {
@@ -28,4 +28,12 @@ export interface Experience {
   role: string;
   color: string;
   description: string;
+}
+
+export interface SiteConfig {
+  url: string;
+  name: string;
+  description: string;
+  author: string;
+  keywords: string[];
 }

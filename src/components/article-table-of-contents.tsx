@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from 'react';
 
-import { Heading } from '@/articles/article-content';
+import { Heading } from '@/components/article-content';
 
 export default function TableOfContents({ headings }: { headings: Heading[] }) {
   const [activeId, setActiveId] = useState<string>('');

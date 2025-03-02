@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Clock, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 
-import { Article } from '@/config/structures';
+import { Article } from '@/structures';
 import { isRecent30DaysDate } from '@/utils/time';
 
 export default function ArticleCard({

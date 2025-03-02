@@ -3,7 +3,7 @@ import path from 'path';
 
 import matter from 'gray-matter';
 
-import { Article, ArticleMetadata } from '@/config/structures';
+import { Article, ArticleMetadata } from '@/structures';
 
 export default class ArticleService {
   private static readonly directory = path.join(
