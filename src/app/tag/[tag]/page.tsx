@@ -41,6 +41,17 @@ function generateJsonLd(tag: string, articles: Article[]) {
   };
 }
 
+export async function generateStaticParams() {
+  const articles = ArticleService.getArticles();
+  const tags = [
+    ...new Set(articles.map((article) => article.metadata.tags || []).flat()),
+  ];
+
+  return tags.map((tag) => ({
+    tag,
+  }));
+}
+
 export default async function TagPage({
   params,
 }: {
