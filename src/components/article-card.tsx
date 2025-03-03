@@ -64,12 +64,11 @@ export default function ArticleCard({
           </h2>
           <div className="flex flex-wrap gap-2 py-2">
             {(article.metadata.tags || []).map((tag, index) => (
-              <span
-                key={hashKey(`tag-${tag}-${index}`)}
-                className="inline-flex rounded bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-800 dark:bg-gray-700 dark:text-gray-200"
-              >
-                {tag}
-              </span>
+              <Link href={`/tag/${tag}`} key={hashKey(`tag-${tag}-${index}`)}>
+                <span className="inline-flex rounded bg-gray-200 px-2 py-0.5 text-xs font-medium text-gray-800 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600">
+                  {tag}
+                </span>
+              </Link>
             ))}
           </div>
           <p className="line-clamp-3 text-gray-600 dark:text-gray-400">

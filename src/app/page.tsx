@@ -1,9 +1,7 @@
-import ArticleCard from '@/components/article-card';
-import ItemRenderer from '@/components/item-renderer';
+import Articles from '@/components/articles';
 import { getSiteConfig } from '@/config/site';
 import ArticleService from '@/lib/article-service';
 import { Article, navItems } from '@/structures';
-import { hashKey } from '@/utils/string';
 
 function generateJsonLd(articles: Article[]) {
   const { name, description, author, keywords, url } = getSiteConfig();
@@ -62,27 +60,11 @@ export default function BlogPage() {
 
   return (
     <>
-      <div>
-        <div className="mb-4 flex items-baseline gap-3">
-          <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
-            Blog
-          </h1>
-          <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {articles.length} articles
-          </span>
-        </div>
-        <div className="space-y-6">
-          <ItemRenderer<Article>
-            items={articles}
-            onItemRender={(article, index) => (
-              <ArticleCard index={index} article={article} />
-            )}
-            onKeyExtract={(article, index) =>
-              hashKey(`${article.metadata.title}${index}`)
-            }
-          />
-        </div>
-      </div>
+      <Articles
+        label="Blog"
+        sublabel={`${articles.length} article/s`}
+        articles={articles}
+      />
       <script
         id="ld-json"
         type="application/ld+json"

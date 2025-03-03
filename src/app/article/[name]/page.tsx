@@ -77,7 +77,8 @@ export default async function ArticlePage({
   params: Promise<{ name: string }>;
 }) {
   const { name } = await params;
-  const article = ArticleService.getArticle(name);
+  const safeName = decodeURIComponent(name);
+  const article = ArticleService.getArticle(safeName);
 
   if (!article) {
     return notFound();
@@ -87,14 +88,14 @@ export default async function ArticlePage({
     <ArticleContent>
       <div className="mb-8 overflow-hidden rounded-lg">
         <Image
-          src={`/articles/images/${name}.png`}
+          src={`/articles/images/${safeName}.png`}
           width={920}
           height={320}
           alt={article.metadata.title}
           className="block dark:hidden"
         />
         <Image
-          src={`/articles/images/${name}-dark.png`}
+          src={`/articles/images/${safeName}-dark.png`}
           width={920}
           height={320}
           alt={article.metadata.title}
