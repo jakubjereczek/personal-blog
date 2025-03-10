@@ -42,10 +42,7 @@ function generateJsonLd(tag: string, articles: Article[]) {
 }
 
 export async function generateStaticParams() {
-  const articles = ArticleService.getArticles();
-  const tags = [
-    ...new Set(articles.map((article) => article.metadata.tags || []).flat()),
-  ];
+  const tags = ArticleService.getTags();
 
   return tags.map((tag) => ({
     tag,
@@ -59,9 +56,7 @@ export default async function TagPage({
 }) {
   const { tag } = await params;
   const safeTag = decodeURIComponent(tag);
-  const articles = ArticleService.getArticles().filter((article) =>
-    article.metadata.tags?.includes(safeTag),
-  );
+  const articles = ArticleService.getArticlesByTag(safeTag);
 
   if (!articles.length) {
     notFound();

@@ -61,6 +61,21 @@ export default class ArticleService {
     }
   }
 
+  static getTags() {
+    const articles = ArticleService.getArticles();
+    const tags = [
+      ...new Set(articles.map((article) => article.metadata.tags || []).flat()),
+    ];
+
+    return tags;
+  }
+
+  static getArticlesByTag(tag: string) {
+    const articles = ArticleService.getArticles();
+
+    return articles.filter((article) => article.metadata.tags?.includes(tag));
+  }
+
   private static parseMarkdown(source: string) {
     const parsed = matter(source);
 
