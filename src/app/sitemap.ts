@@ -12,12 +12,14 @@ enum SitemapType {
   Articles = 'articles',
 }
 
+export const sitemaps = [
+  { id: SitemapType.Main },
+  { id: SitemapType.Tags },
+  { id: SitemapType.Articles },
+];
+
 export function generateSitemaps() {
-  return [
-    { id: SitemapType.Main },
-    { id: SitemapType.Tags },
-    { id: SitemapType.Articles },
-  ];
+  return sitemaps;
 }
 
 export default function sitemap({

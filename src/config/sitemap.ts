@@ -15,7 +15,7 @@ export function generateArticlesSitemap(): MetadataRoute.Sitemap {
     url: `${url}/article/${article.slug}`,
     lastModified: new Date(article.metadata.date).toISOString(),
     changeFrequency: 'monthly',
-    images: [`${url}/images/${article.slug}-dark.png`],
+    images: [`${url}/articles/images/${article.slug}-dark.png`],
   }));
 }
 

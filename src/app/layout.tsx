@@ -3,7 +3,7 @@ import { Metadata, Viewport } from 'next';
 import './global.css';
 import Navigation from '@/components/navigation';
 import { getBuildTimeString } from '@/config/build';
-import { getSeoMetadata, metaIcons } from '@/config/seo';
+import { getSeoMetadata, metaTags } from '@/config/seo';
 import { hashKey } from '@/utils/string';
 
 export const metadata: Metadata = getSeoMetadata();
@@ -18,11 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {metaIcons.map((props, index) => (
-          <link
-            key={hashKey(`${props.rel}${props.sizes}${index}`)}
-            {...props}
-          />
+        {metaTags.map((props, index) => (
+          <link key={hashKey(`${props.rel}${index}`)} {...props} />
         ))}
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta

@@ -35,7 +35,7 @@ export function getSeoMetadata(): Metadata {
   };
 }
 
-export const metaIcons = [
+export const metaTags = [
   {
     rel: 'apple-touch-icon',
     sizes: '57x57',
@@ -108,5 +108,17 @@ export const metaIcons = [
   {
     rel: 'manifest',
     href: '/icons_set/manifest.json/',
+  },
+  {
+    rel: 'sitemap',
+    href: '/sitemap/main.xml',
+  },
+  {
+    rel: 'sitemap',
+    href: '/sitemap/tags.xml',
+  },
+  {
+    rel: 'sitemap',
+    href: '/sitemap/articles.xml',
   },
 ];
