@@ -1,6 +1,10 @@
 import { MetadataRoute } from 'next';
 
-import { generateMainSitemap, generateTagsSitemap } from '@/config/sitemap';
+import {
+  generateArticlesSitemap,
+  generateMainSitemap,
+  generateTagsSitemap,
+} from '@/config/sitemap';
 
 enum SitemapType {
   Main = 'main',
@@ -27,7 +31,7 @@ export default function sitemap({
     case SitemapType.Tags:
       return generateTagsSitemap();
     case SitemapType.Articles:
-      return generateMainSitemap();
+      return generateArticlesSitemap();
     default:
       throw new Error(`Unknown sitemap type: ${id}`);
   }

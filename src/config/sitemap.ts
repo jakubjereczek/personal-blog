@@ -7,7 +7,9 @@ import { getLatestArticleDateByTag } from '@/utils/article';
 
 export function generateArticlesSitemap(): MetadataRoute.Sitemap {
   const { url } = getSiteConfig();
-  const articles = ArticleService.getArticles();
+  const articles = ArticleService.getArticles().filter(
+    (article) => !article.metadata.external,
+  );
 
   return articles.map((article) => ({
     url: `${url}/article/${article.slug}`,
