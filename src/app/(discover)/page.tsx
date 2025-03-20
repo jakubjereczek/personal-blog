@@ -62,7 +62,7 @@ export default function BlogPage() {
     <>
       <Articles
         label="Blog"
-        sublabel={`${articles.length} article/s`}
+        sublabel={`${articles.length} article${articles.length === 1 ? '' : 's'}`}
         articles={articles}
       />
       <script

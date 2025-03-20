@@ -39,4 +39,7 @@ export interface SiteConfig {
   description: string;
   author: string;
   keywords: string[];
+  hero: {
+    description: string;
+  };
 }

@@ -1,32 +1,27 @@
-'use client';
-
 import { LucideIcon } from 'lucide-react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 
-import Hint from '@/components/hint';
-
-interface Props {
+const NavLink = ({
+  pathname,
+  href,
+  icon: Icon,
+  onClick,
+}: {
+  pathname: string;
   href: string;
+  icon: LucideIcon;
   label: string;
-  Icon: LucideIcon;
-}
-
-export default function NavigationItem({ href, label, Icon }: Props) {
-  const pathname = usePathname();
-
+  onClick: () => void;
+}) => {
   return (
     <Link
       href={href}
-      className={`rounded-full bg-gray-200 p-2 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 ${pathname === href ? 'text-blue-600 dark:text-blue-400' : 'text-gray-800 dark:text-gray-200'} flex h-8 w-8 items-center justify-center`}
+      className={`rounded-full bg-gray-200 p-2 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 ${pathname === href ? 'bg-gray-300 dark:bg-gray-600' : ''} flex h-8 w-8 items-center justify-center text-gray-800 duration-200 hover:scale-110 dark:text-gray-200`}
+      onClick={onClick}
     >
-      <Hint
-        position="bottom"
-        Icon={Icon}
-        label={label}
-        size={16}
-        className=""
-      />
+      <Icon size={18} />
     </Link>
   );
-}
+};
+
+export default NavLink;

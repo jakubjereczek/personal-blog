@@ -16,5 +16,9 @@ export function getSiteConfig(): SiteConfig {
       'developer blog',
       'web technologies',
     ],
+    hero: {
+      description:
+        'A blog about coding and modern technologies — diving into the future of (web) development, one post at a time.',
+    },
   };
 }

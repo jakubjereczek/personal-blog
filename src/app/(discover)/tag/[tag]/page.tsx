@@ -66,7 +66,7 @@ export default async function TagPage({
     <>
       <Articles
         label={`Blog articles tagged with ${safeTag}`}
-        sublabel={`${articles.length} article/s`}
+        sublabel={`${articles.length} article${articles.length === 1 ? '' : 's'}`}
         articles={articles}
       />
       <script

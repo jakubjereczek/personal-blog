@@ -4,8 +4,14 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
+import { getSiteConfig } from '@/config/site';
+
 export default function Hero() {
   const { scrollY } = useScroll();
+  const {
+    name,
+    hero: { description },
+  } = getSiteConfig();
 
   return (
     <div className="relative overflow-hidden pt-24 md:pt-32">
@@ -21,18 +27,11 @@ export default function Hero() {
             transition={{ duration: 0.5 }}
             style={{ y: useTransform(scrollY, [0, 50], [0, -50]) }}
           >
-            <h1
-              className="md:text text-4xl font-bold tracking-tight text-white md:text-6xl"
-              style={{ textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)' }}
-            >
-              <span className="block">jakubjereczek.com</span>
+            <h1 className="md:text text-4xl font-bold tracking-tight text-white drop-shadow-md md:text-6xl">
+              <span className="block">{name}</span>
             </h1>
-            <p
-              className="mx-auto mt-6 max-w-2xl text-lg text-white"
-              style={{ textShadow: '0px 1px 2px rgba(0, 0, 0, 0.3)' }}
-            >
-              A blog about coding and modern technologies — diving into the
-              future of (web) development, one post at a time.
+            <p className="mx-auto mt-6 max-w-2xl text-lg text-white drop-shadow-sm">
+              {description}
             </p>
           </motion.div>
 
@@ -76,13 +75,9 @@ export default function Hero() {
             </div>
             <div className="text-center text-gray-900 dark:text-white">
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                2+
+                2
               </p>
-              <p className="text-sm text-inherit">In-Depth Articles</p>
-            </div>
-            <div className="text-center text-gray-900 dark:text-white">
-              <p className="text-3xl font-bold">0</p>
-              <p className="text-sm text-inherit">Monthly Readers</p>
+              <p className="text-sm text-inherit">Articles</p>
             </div>
           </motion.div>
         </div>
