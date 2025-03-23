@@ -1,87 +1,38 @@
-import fs from 'fs';
-import path from 'path';
+import Service from '@/lib/service';
+import { Article } from '@/structures';
 
-import matter from 'gray-matter';
-
-import { Article, ArticleMetadata } from '@/structures';
-
-export default class ArticleService {
-  private static readonly directory = path.join(
-    process.cwd(),
-    'public/articles',
-  );
-
-  static getArticle(slug: string): Article | undefined {
-    const filePath = path.join(this.directory, `${slug}.mdx`);
-    if (!fs.existsSync(filePath)) {
-      return undefined;
-    }
-    const source = fs.readFileSync(filePath, 'utf8');
-    const { metadata, content } = this.parseMarkdown(source);
-
-    return {
-      metadata,
-      content,
-      slug,
-    };
+class ArticleService extends Service<Article> {
+  constructor() {
+    super('public/articles');
   }
 
-  static getArticles(): Article[] {
-    const slugs = this.getArticlesNames();
+  getArticle(slug: string): Article | undefined {
+    return this.get(slug);
+  }
 
-    return (
-      slugs
-        .map((slug) => {
-          const article = this.getArticle(slug);
-          if (article) {
-            return { ...article, slug } as Article;
-          }
-          return undefined;
-        })
-        .filter(
-          (article) => article !== undefined && article.metadata,
-        ) as Article[]
-    ).sort(
-      (a, b) =>
-        new Date(b.metadata.date).getTime() -
-        new Date(a.metadata.date).getTime(),
+  getArticles(): Article[] {
+    return this.getMany();
+  }
+
+  getArticlesNames(): string[] {
+    return this.getList();
+  }
+
+  getTags(): string[] {
+    return [
+      ...new Set(
+        this.getMany()
+          .map((entry) => entry.metadata.tags || [])
+          .flat(),
+      ),
+    ];
+  }
+
+  getArticlesByTags(tag: string) {
+    return this.getArticles().filter((article) =>
+      article.metadata.tags?.includes(tag),
     );
   }
-
-  static getArticlesNames(): string[] {
-    try {
-      const filenames = fs.readdirSync(this.directory);
-      const slugs = filenames
-        .filter((filename) => filename.endsWith('.mdx'))
-        .map((filename) => filename.replace(/\.mdx$/, ''));
-
-      return slugs;
-    } catch {
-      return [];
-    }
-  }
-
-  static getTags() {
-    const articles = ArticleService.getArticles();
-    const tags = [
-      ...new Set(articles.map((article) => article.metadata.tags || []).flat()),
-    ];
-
-    return tags;
-  }
-
-  static getArticlesByTag(tag: string) {
-    const articles = ArticleService.getArticles();
-
-    return articles.filter((article) => article.metadata.tags?.includes(tag));
-  }
-
-  private static parseMarkdown(source: string) {
-    const parsed = matter(source);
-
-    return {
-      metadata: parsed.data as ArticleMetadata,
-      content: parsed.content,
-    };
-  }
 }
+
+export default new ArticleService();
