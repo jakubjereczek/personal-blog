@@ -12,11 +12,11 @@ interface Props {
 export default function Articles({ label, sublabel, articles }: Props) {
   return (
     <div>
-      <div className="mb-4 flex items-baseline gap-3">
+      <div className="mb-4 flex items-baseline justify-between gap-3">
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
           {label}
         </h1>
-        <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+        <span className="shrink-0 rounded-full bg-blue-600 px-3 py-1 text-center text-sm text-gray-200 drop-shadow-sm dark:bg-blue-400">
           {sublabel}
         </span>
       </div>

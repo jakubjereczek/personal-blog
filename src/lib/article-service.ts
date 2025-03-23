@@ -28,7 +28,7 @@ class ArticleService extends Service<Article> {
     ];
   }
 
-  getArticlesByTags(tag: string) {
+  getArticlesByTag(tag: string) {
     return this.getArticles().filter((article) =>
       article.metadata.tags?.includes(tag),
     );
