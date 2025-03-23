@@ -34,7 +34,7 @@ export default function TableOfContents({ headings }: { headings: Heading[] }) {
           key={hashKey(`h-${heading.id}-${index}`)}
           href={`#${heading.id}`}
           onClick={(event) => onClick(event, heading.id, index)}
-          className={`block py-1 ${heading.level === 1 ? 'font-medium' : ''} ${activeId === heading.id ? 'text-blue-600 underline dark:text-blue-400' : 'text-gray-600 dark:text-gray-400 dark:hover:text-gray-200'}`}
+          className={`block py-1 hover:underline ${heading.level === 1 ? 'font-medium' : 'font-normal'} ${activeId === heading.id ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200'}`}
           style={{ paddingLeft: `${(heading.level - 1) * 10}px` }}
         >
           {heading.title}

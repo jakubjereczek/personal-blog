@@ -16,7 +16,7 @@ export default function Articles({ label, sublabel, articles }: Props) {
         <h1 className="text-2xl font-semibold text-gray-900 dark:text-white">
           {label}
         </h1>
-        <span className="shrink-0 rounded-full bg-blue-600 px-3 py-1 text-center text-sm text-gray-200 drop-shadow-sm dark:bg-blue-400">
+        <span className="shrink-0 rounded-full bg-blue-600 px-3 py-1 text-center text-sm text-gray-200 drop-shadow-sm dark:bg-blue-400 dark:text-gray-800">
           {sublabel}
         </span>
       </div>

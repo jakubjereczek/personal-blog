@@ -57,7 +57,7 @@ export function getMDXComponents(): MDXComponents {
     ),
     a: (props: ComponentProps<'a'>) => (
       <a
-        className="text-blue-600 hover:underline dark:text-blue-400 dark:hover:text-blue-300"
+        className="text-gray-600 underline decoration-blue-600 hover:text-gray-800 hover:decoration-gray-800 dark:text-gray-400 dark:decoration-blue-400 dark:hover:text-gray-200 dark:hover:decoration-gray-200"
         {...props}
       />
     ),
