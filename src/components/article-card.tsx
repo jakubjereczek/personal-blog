@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Clock, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { useInView } from 'react-intersection-observer';
 
 import Hint from '@/components/hint';
 import { Article } from '@/structures';
@@ -16,10 +17,16 @@ export default function ArticleCard({
   article: Article;
   index: number;
 }) {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.2,
+  });
+
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: index * 0.1 + 0.2 }}
     >
       <Link

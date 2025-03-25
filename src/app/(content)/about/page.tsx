@@ -1,5 +1,15 @@
-import { aboutMe, experiences } from '@/config/data';
-import { hashKey } from '@/utils/string';
+'use client';
+
+import { GraduationCap, BriefcaseBusiness } from 'lucide-react';
+
+import AboutMe from '@/components/about-me';
+import Timeline from '@/components/timeline';
+import { education, experience } from '@/config/data';
+import {
+  mapEducationToTimelineItem,
+  mapExperienceToTimelineItem,
+  mapper,
+} from '@/utils/timeline';
 
 export default function AboutPage() {
   return (
@@ -7,46 +17,25 @@ export default function AboutPage() {
       <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-200">
         About me
       </h2>
-      {aboutMe.map((payload, index) => (
-        <p
-          key={hashKey(`about-me-${index}`)}
-          className="mb-4 text-gray-600 dark:text-gray-400"
-        >
-          {payload}
-        </p>
-      ))}
-      <div className="mt-16">
+      <AboutMe />
+      <div className="mt-12">
         <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
-          Experience
+          Experience & education
         </h2>
-        <div className="space-y-6">
-          {experiences.map((exp, index) => (
-            <div
-              key={hashKey(`tag-${exp.company}-${index}`)}
-              className="grid grid-cols-[100px,1fr] items-baseline gap-4"
-            >
-              <div className="text-sm text-gray-500 dark:text-gray-400">
-                {exp.period}
-              </div>
-              <div>
-                <div className="flex items-center gap-2">
-                  <div
-                    className="h-3 w-3 rounded-sm"
-                    style={{ backgroundColor: exp.color }}
-                  />
-                  <span className="font-medium text-gray-900 dark:text-white">
-                    {exp.company}
-                  </span>
-                </div>
-                <div className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                  {exp.role}
-                </div>
-                <div className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                  {exp.description}
-                </div>
-              </div>
-            </div>
-          ))}
+        <div>
+          <p className="text-gray-600 dark:text-gray-400">
+            My career and educational history.
+          </p>
+          <div className="py-4">
+            <Timeline
+              data={mapper(mapExperienceToTimelineItem, experience)}
+              config={{ Icon: BriefcaseBusiness, iconColor: 'bg-green-200' }}
+            />
+            <Timeline
+              data={mapper(mapEducationToTimelineItem, education)}
+              config={{ Icon: GraduationCap, iconColor: 'bg-blue-200' }}
+            />
+          </div>
         </div>
       </div>
     </>

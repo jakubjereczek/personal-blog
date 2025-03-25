@@ -1,19 +1,74 @@
-import { Experience } from '@/structures';
+import { Education, Experience } from '@/structures';
 import { calculateYearsSince } from '@/utils/time';
 
-export const experiences: Experience[] = [
+export const experience: Experience[] = [
   {
-    period: '07.2021 – now',
+    period: { start: '07.2021', finished: 'now' },
     company: 'OKE Software',
+    companyUrl: 'https://oke.pl/',
+    location: 'Gdańsk / Remote',
     role: 'Frontend developer',
-    color: '#0066FF',
     description:
-      'Develop Smart TV project for the leading European provider of video and pay TV.',
+      'Software development in TypeScript, React. Developing and maintaining a multi-brand smartTV project (includes SPA and Google Cast Receiver application), designed to support over a dozen brands from Europe and Asia. Working in an international team using Agile methodology.',
+    highlights: [
+      'JavaScript',
+      'TypeScript',
+      'React',
+      'Redux',
+      'RxPlayer',
+      'WebSocket',
+      'REST API',
+      'Google Cast Receiver',
+      'Firebase',
+      'Amplitude',
+      'RWD',
+      'Webpack',
+      'CSS-in-JS',
+      'Cypress',
+      'Jest',
+      'React Testing Library',
+      'Sonarcode',
+      'Solution Architecture',
+      'Streaming Media',
+      'Agile Methodology',
+      'Jira',
+      'Confluence',
+      'Teamwork',
+    ],
   },
-] as const;
+].reverse();
+
+export const education: Education[] = [
+  {
+    period: { start: '09.2019', finished: '06.2022' },
+    title: 'Computer Science and Econometrics',
+    university: 'University of Gdańsk',
+    location: 'Gdańsk',
+    highlights: [
+      'C#',
+      '.NET',
+      'SQL',
+      'TSQL',
+      'Linux',
+      'Data administration',
+      'Big data',
+    ],
+    description: 'Specialization: IT application in business',
+  },
+  {
+    period: { start: '09.2022', finished: '06.2024' },
+    title: 'Computer Science and Econometrics',
+    university: 'University of Gdańsk',
+    location: 'Gdańsk',
+    highlights: ['Data warehouse', 'Big data', 'SAP ERP'],
+    description: 'Specialization: IT application in business',
+  },
+].reverse();
+
+export const exp = calculateYearsSince(experience[0].period.start?.slice(0, 7));
 
 export const aboutMe = [
-  `Hi there! I'm Jakub, a passionate software developer with ${calculateYearsSince(experiences[0].period.slice(0, 7))} commercial experience in web development.`,
-  'I specialize in front-end development, with a strong focus on React and Next.js. Additionally, I am expanding my expertise in backend technologies like Node.js and Nest.js. I primarily work within the JavaScript ecosystem, although I also have some experience with other stuffs. I love creating user-friendly interfaces and solving complex problems with clean, efficient code.',
-  'This blog is my platform to share insights, thoughts on web development, trends and technology in general. I created this space to serve as a reflection of my personal growth. I hope you find the content here useful and inspiring. Feel free to reach out if you have any questions.',
+  `Hi there! I'm Jakub, a passionate software developer with ${exp} commercial experience in web development.`,
+  'Commercially, I specialize in front-end development, but I’m actively expanding my skills toward full-stack. My interests gravitate toward two languages: JavaScript (including TypeScript) and Go. On the JavaScript front, I’m particularly interested in React, Next.js, Node.js, and Nest.js.',
+  'This blog is my platform to share insights, thoughts on (web) development, trends and technology in general. I created this space to serve as a reflection of my personal growth. I hope you find the content here useful and inspiring. Feel free to reach out if you have any questions.',
 ];

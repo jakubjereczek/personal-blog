@@ -1,5 +1,9 @@
 import { Home, LucideIcon, User2 } from 'lucide-react';
 
+interface Period {
+  start: string;
+  finished: string;
+}
 interface NavItem {
   name: string;
   href: string;
@@ -26,10 +30,21 @@ export type Article = {
 };
 
 export interface Experience {
-  period: string;
+  period: Period;
   company: string;
+  companyUrl: string;
+  location: string;
   role: string;
-  color: string;
+  description: string;
+  highlights: string[];
+}
+
+export interface Education {
+  period: Period;
+  title: string;
+  university: string;
+  location: string;
+  highlights: string[];
   description: string;
 }
 
@@ -42,4 +57,14 @@ export interface SiteConfig {
   hero: {
     description: string;
   };
+}
+
+export interface TimelineItem {
+  period: Period;
+  title: string;
+  subtitle: string;
+  description: string;
+  highlights: string[];
+  location: string;
+  url: string | undefined;
 }
