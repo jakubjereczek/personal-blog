@@ -1,4 +1,5 @@
-import { Education, Experience, TimelineItem } from '@/structures';
+import { Course, Education, Experience, TimelineItem } from '@/structures';
+import { formatDate } from '@/utils/time';
 
 export function mapEducationToTimelineItem({
   period,
@@ -14,8 +15,8 @@ export function mapEducationToTimelineItem({
     subtitle: university,
     description,
     highlights,
+    technologies: [],
     location,
-    url: undefined,
   };
 }
 
@@ -34,11 +35,39 @@ export function mapExperienceToTimelineItem({
     subtitle: company,
     description,
     highlights,
+    technologies: [],
     location,
     url: companyUrl,
   };
 }
 
+export function mapCourseToTimelineItem({
+  title,
+  description,
+  finishedAt,
+  technologies,
+  platform,
+  certificateUrl,
+  courseUrl,
+  duration,
+}: Course): TimelineItem {
+  return {
+    period: {
+      start: undefined,
+      finished: formatDate(finishedAt),
+    },
+    title,
+    subtitle: platform.name,
+    platform,
+    description,
+    highlights: [],
+    technologies,
+    location: '',
+    url: courseUrl,
+    certUrl: certificateUrl,
+    duration,
+  };
+}
 export function mapper<TItem>(
   fn: (item: TItem) => TimelineItem,
   data: TItem[],
