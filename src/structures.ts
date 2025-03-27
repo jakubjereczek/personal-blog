@@ -1,7 +1,8 @@
-import { Home, LucideIcon, User2 } from 'lucide-react';
+import { Home, LucideIcon, User2, Book } from 'lucide-react';
+import { IconType } from 'react-icons';
 
 interface Period {
-  start: string;
+  start: string | undefined;
   finished: string;
 }
 interface NavItem {
@@ -13,6 +14,7 @@ interface NavItem {
 export const navItems: NavItem[] = [
   { name: 'Blog', href: '/', Icon: Home },
   { name: 'About me', href: '/about', Icon: User2 },
+  { name: 'Courses', href: 'courses', Icon: Book },
 ];
 
 export type ArticleMetadata = {
@@ -48,6 +50,29 @@ export interface Education {
   description: string;
 }
 
+export interface Technology {
+  name: string;
+  Icon: IconType;
+  color: string;
+}
+
+export interface Platform {
+  name: string;
+  Icon: IconType;
+  color: string;
+}
+
+export interface Course {
+  title: string;
+  description: string;
+  finishedAt: string;
+  technologies: Technology[];
+  duration: number; // minutes
+  platform: Platform;
+  certificateUrl: string;
+  courseUrl: string;
+}
+
 export interface SiteConfig {
   url: string;
   name: string;
@@ -65,6 +90,10 @@ export interface TimelineItem {
   subtitle: string;
   description: string;
   highlights: string[];
+  technologies: Technology[];
   location: string;
-  url: string | undefined;
+  url?: string;
+  certUrl?: string;
+  duration?: number;
+  platform?: Platform;
 }

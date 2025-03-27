@@ -1,4 +1,17 @@
-import { Education, Experience } from '@/structures';
+import {
+  SiJavascript,
+  SiNextdotjs,
+  SiTypescript,
+  SiUdemy,
+} from 'react-icons/si';
+
+import {
+  Course,
+  Education,
+  Experience,
+  Technology,
+  Platform,
+} from '@/structures';
 import { calculateYearsSince } from '@/utils/time';
 
 export const experience: Experience[] = [
@@ -65,10 +78,56 @@ export const education: Education[] = [
   },
 ].reverse();
 
-export const exp = calculateYearsSince(experience[0].period.start?.slice(0, 7));
+export type TechnologyName = 'JavaScript' | 'TypeScript' | 'Next';
+
+export type PlatformName = 'Udemy';
+
+export const technologies: { [key in TechnologyName]: Technology } = {
+  JavaScript: {
+    name: 'JavaScript',
+    Icon: SiJavascript,
+    color: 'bg-yellow-200',
+  },
+  TypeScript: {
+    name: 'TypeScript',
+    Icon: SiTypescript,
+    color: 'bg-blue-200',
+  },
+  Next: {
+    name: 'Next.js',
+    Icon: SiNextdotjs,
+    color: 'bg-white',
+  },
+};
+
+export const platforms: { [key in PlatformName]: Platform } = {
+  Udemy: {
+    name: 'Udemy',
+    Icon: SiUdemy,
+    color: 'bg-violet-200',
+  },
+};
+
+export const courses: Course[] = [
+  {
+    title: 'Next.15 & React - The Complete Guide',
+    description:
+      'I learned how to build full-stack ReactJS + NextJS apps using the App Router, starting from the basics and progressing to more advanced topics',
+    finishedAt: '2024-12-18T16:00:00',
+    technologies: [technologies.TypeScript, technologies.Next],
+    duration: 1160,
+    platform: platforms.Udemy,
+    certificateUrl: '',
+    courseUrl: 'https://www.udemy.com/course/javascript-for-beginners/',
+  },
+];
+
+export const exp = calculateYearsSince(
+  experience[0].period.start?.slice(0, 7) ?? '',
+);
 
 export const aboutMe = [
   `Hi there! I'm Jakub, a passionate software developer with ${exp} commercial experience in web development.`,
   'Commercially, I specialize in front-end development, but I’m actively expanding my skills toward full-stack. My interests gravitate toward two languages: JavaScript (including TypeScript) and Go. On the JavaScript front, I’m particularly interested in React, Next.js, Node.js, and Nest.js.',
-  'This blog is my platform to share insights, thoughts on (web) development, trends and technology in general. I created this space to serve as a reflection of my personal growth. I hope you find the content here useful and inspiring. Feel free to reach out if you have any questions.',
+  'This blog is my platform to share insights, thoughts on (web) development, trends and technologies in general. I created this space to serve as a reflection of my personal growth. I hope you find the content here useful and inspiring. Feel free to reach out if you have any questions.',
 ];

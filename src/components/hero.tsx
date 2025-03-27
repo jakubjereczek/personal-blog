@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
 import { getSiteConfig } from '@/config/site';
@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-[#2A2A42] to-[#5D6EE0] dark:from-[#1E1E2E] dark:to-[#4C5FD5]">
         <div className="absolute left-1/2 top-1/2 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500/30 blur-[120px]"></div>
       </div>
-      <div className="dark:bg-tw-gradient-hero-dark bg-tw-gradient-hero-light pointer-events-none absolute bottom-0 left-0 right-0 h-80"></div>
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-80 bg-tw-gradient-hero-light dark:bg-tw-gradient-hero-dark"></div>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <motion.div
@@ -44,9 +44,9 @@ export default function Hero() {
           >
             <Link
               href="/about"
-              className="rounded-lg border border-white bg-white px-6 py-3 font-medium shadow-md backdrop-blur-sm transition-all hover:shadow-[0px_0px_10px_rgba(255,255,255,0.9)]"
+              className="flex justify-center rounded-lg border border-white bg-white px-6 py-3 font-medium shadow-md backdrop-blur-sm transition-all hover:shadow-[0px_0px_10px_rgba(255,255,255,0.9)]"
             >
-              About the blog
+              <span>About me</span>
               <motion.span
                 className="ml-2 inline-block"
                 animate={{ x: [0, 4, 0] }}
@@ -56,7 +56,7 @@ export default function Hero() {
                   ease: 'easeInOut',
                 }}
               >
-                <ArrowRight size={12} />
+                <ChevronRight size={12} />
               </motion.span>
             </Link>
           </motion.div>

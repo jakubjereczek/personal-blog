@@ -21,3 +21,18 @@ export function calculateYearsSince(period: string) {
   }
   return `${yearsDiff} years ${monthsDiff ? `${monthsDiff} months` : ``}`;
 }
+
+export function formatDate(ts: number): string {
+  const date = new Date(ts);
+  const day = date.getDate();
+  const month = date.toLocaleString('en-US', { month: 'long' });
+  const year = date.getFullYear();
+
+  return `${day} ${month} ${year}`;
+}
+
+export function convertMinutesToHours(minutes: number): string {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  return `${hours.toString().padStart(2, '0')}:${remainingMinutes.toString().padStart(2, '0')}`;
+}
