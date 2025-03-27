@@ -22,8 +22,8 @@ export function calculateYearsSince(period: string) {
   return `${yearsDiff} years ${monthsDiff ? `${monthsDiff} months` : ``}`;
 }
 
-export function formatDate(ts: number): string {
-  const date = new Date(ts);
+export function formatDate(datestring: string): string {
+  const date = new Date(datestring);
   const day = date.getDate();
   const month = date.toLocaleString('en-US', { month: 'long' });
   const year = date.getFullYear();
