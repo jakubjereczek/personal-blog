@@ -53,7 +53,7 @@ export interface Education {
 export interface Technology {
   name: string;
   Icon: IconType;
-  color: string;
+  colors: string[];
 }
 
 export interface Platform {

@@ -57,7 +57,7 @@ export default function Hero({ length }: { length: number }) {
                   ease: 'easeInOut',
                 }}
               >
-                <ChevronRight size={12} />
+                <ChevronRight size={24} />
               </motion.span>
             </Link>
           </motion.div>

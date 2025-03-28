@@ -41,7 +41,7 @@ function TimelineItemCourse({
                     value={technology.name}
                     icon={{
                       Icon: technology.Icon,
-                      color: technology.color,
+                      colors: technology.colors,
                     }}
                   />
                 ))}

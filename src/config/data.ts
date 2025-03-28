@@ -87,22 +87,22 @@ export const technologies: { [key in TechnologyName]: Technology } = {
   JavaScript: {
     name: 'JavaScript',
     Icon: SiJavascript,
-    color: 'yellow-300',
+    colors: ['yellow-400'],
   },
   TypeScript: {
     name: 'TypeScript',
     Icon: SiTypescript,
-    color: 'blue-300',
+    colors: ['blue-400'],
   },
   Next: {
     name: 'Next.js',
     Icon: SiNextdotjs,
-    color: 'white',
+    colors: ['dark', 'white'],
   },
   React: {
     name: 'React.js',
     Icon: SiReact,
-    color: 'blue-300',
+    colors: ['blue-400'],
   },
 };
 

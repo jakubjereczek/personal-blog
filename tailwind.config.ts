@@ -12,6 +12,11 @@ export default {
       },
     },
   },
+  safelist: [
+    {
+      pattern: /text-\w{1,}/,
+    },
+  ],
   plugins: [],
   darkMode: 'class',
 } satisfies Config;

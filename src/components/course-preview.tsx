@@ -56,7 +56,7 @@ function CoursePreview({
                       value={technology.name}
                       icon={{
                         Icon: technology.Icon,
-                        color: technology.color,
+                        colors: technology.colors,
                       }}
                       border={false}
                     />
