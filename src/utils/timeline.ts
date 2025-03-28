@@ -1,4 +1,10 @@
-import { Course, Education, Experience, TimelineItem } from '@/structures';
+import {
+  Course,
+  Education,
+  Experience,
+  TimelineItem,
+  TimelineItemRenderType,
+} from '@/structures';
 import { formatDate } from '@/utils/time';
 
 export function mapEducationToTimelineItem({
@@ -8,15 +14,18 @@ export function mapEducationToTimelineItem({
   location,
   highlights,
   description,
-}: Education): TimelineItem {
+}: Education): TimelineItem<TimelineItemRenderType.Qualifications> {
   return {
-    period,
+    renderType: TimelineItemRenderType.Qualifications,
     title,
     subtitle: university,
     description,
-    highlights,
-    technologies: [],
-    location,
+    args: {
+      period,
+      highlights,
+      location,
+      url: '',
+    },
   };
 }
 
@@ -28,16 +37,18 @@ export function mapExperienceToTimelineItem({
   role,
   highlights,
   description,
-}: Experience): TimelineItem {
+}: Experience): TimelineItem<TimelineItemRenderType.Qualifications> {
   return {
-    period,
+    renderType: TimelineItemRenderType.Qualifications,
     title: role,
     subtitle: company,
     description,
-    highlights,
-    technologies: [],
-    location,
-    url: companyUrl,
+    args: {
+      period,
+      highlights,
+      location,
+      url: companyUrl,
+    },
   };
 }
 
@@ -50,27 +61,28 @@ export function mapCourseToTimelineItem({
   certificateUrl,
   courseUrl,
   duration,
-}: Course): TimelineItem {
+}: Course): TimelineItem<TimelineItemRenderType.Course> {
   return {
-    period: {
-      start: undefined,
-      finished: formatDate(finishedAt),
-    },
+    renderType: TimelineItemRenderType.Course,
     title,
     subtitle: platform.name,
-    platform,
     description,
-    highlights: [],
-    technologies,
-    location: '',
-    url: courseUrl,
-    certUrl: certificateUrl,
-    duration,
+    args: {
+      period: {
+        start: undefined,
+        finished: formatDate(finishedAt),
+      },
+      platform,
+      technologies,
+      url: courseUrl,
+      certUrl: certificateUrl,
+      duration,
+    },
   };
 }
-export function mapper<TItem>(
-  fn: (item: TItem) => TimelineItem,
+export function mapper<TItem, TRenderType extends TimelineItemRenderType>(
+  fn: (item: TItem) => TimelineItem<TRenderType>,
   data: TItem[],
-): TimelineItem[] {
+): TimelineItem<TRenderType>[] {
   return data.map(fn);
 }

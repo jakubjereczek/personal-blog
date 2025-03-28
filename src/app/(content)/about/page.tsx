@@ -5,7 +5,7 @@ import { GraduationCap, BriefcaseBusiness } from 'lucide-react';
 import AboutMe from '@/components/about-me';
 import ContentTeaser from '@/components/content-teaser';
 import Courses from '@/components/courses';
-import Timeline from '@/components/timeline';
+import Timeline from '@/components/timeline/timeline';
 import { courses, education, experience } from '@/config/data';
 import {
   mapEducationToTimelineItem,
@@ -54,6 +54,7 @@ export default function AboutPage() {
           </p>
           <div className="py-4">
             <ContentTeaser
+              // TODO: when more than 2 courses appear update the value
               maxHeight={70}
               title="Discover more..."
               description="Explore the full list of courses I have completed, along with detailed metadata and insights. Visit the Courses subpage to see my learning journey since I created this personal page."

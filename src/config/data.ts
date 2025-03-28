@@ -1,6 +1,7 @@
 import {
   SiJavascript,
   SiNextdotjs,
+  SiReact,
   SiTypescript,
   SiUdemy,
 } from 'react-icons/si';
@@ -78,7 +79,7 @@ export const education: Education[] = [
   },
 ].reverse();
 
-export type TechnologyName = 'JavaScript' | 'TypeScript' | 'Next';
+export type TechnologyName = 'JavaScript' | 'TypeScript' | 'Next' | 'React';
 
 export type PlatformName = 'Udemy';
 
@@ -86,17 +87,22 @@ export const technologies: { [key in TechnologyName]: Technology } = {
   JavaScript: {
     name: 'JavaScript',
     Icon: SiJavascript,
-    color: 'bg-yellow-200',
+    color: 'yellow-300',
   },
   TypeScript: {
     name: 'TypeScript',
     Icon: SiTypescript,
-    color: 'bg-blue-200',
+    color: 'blue-300',
   },
   Next: {
     name: 'Next.js',
     Icon: SiNextdotjs,
-    color: 'bg-white',
+    color: 'white',
+  },
+  React: {
+    name: 'React.js',
+    Icon: SiReact,
+    color: 'blue-300',
   },
 };
 
@@ -112,15 +118,15 @@ export const courses: Course[] = [
   {
     title: 'Next.15 & React - The Complete Guide',
     description:
-      'I learned how to build full-stack ReactJS + NextJS apps using the App Router, starting from the basics and progressing to more advanced topics',
+      'I learned how to build full-stack ReactJS + NextJS apps using the App Router (without legacy Pages Router), starting from the basics and progressing to more advanced topics.',
     finishedAt: '2024-12-18T16:00:00',
-    technologies: [technologies.TypeScript, technologies.Next],
+    technologies: [technologies.React, technologies.Next],
     duration: 1160,
     platform: platforms.Udemy,
     certificateUrl: '',
-    courseUrl: 'https://www.udemy.com/course/javascript-for-beginners/',
+    courseUrl: 'https://www.udemy.com/course/nextjs-react-the-complete-guide/',
   },
-];
+].reverse();
 
 export const exp = calculateYearsSince(
   experience[0].period.start?.slice(0, 7) ?? '',

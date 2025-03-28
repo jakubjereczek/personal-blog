@@ -84,16 +84,48 @@ export interface SiteConfig {
   };
 }
 
-export interface TimelineItem {
-  period: Period;
+// timeline
+
+export enum TimelineItemRenderType {
+  Qualifications = 'qualifications',
+  Course = 'course',
+}
+
+interface QualificationsParams {
+  highlights: string[];
+  location: string;
+}
+
+interface CourseParams {
+  technologies: Technology[];
+  certUrl?: string;
+  duration: number; // minutes
+  platform: Platform;
+}
+
+type TimelineItemParamsMap = {
+  [TimelineItemRenderType.Qualifications]: QualificationsParams;
+  [TimelineItemRenderType.Course]: CourseParams;
+};
+
+interface TimelineItemBaseArgs {
   title: string;
   subtitle: string;
   description: string;
-  highlights: string[];
-  technologies: Technology[];
-  location: string;
-  url?: string;
-  certUrl?: string;
-  duration?: number;
-  platform?: Platform;
+}
+
+interface TimelineItemBaseRenderArgs {
+  period: Period;
+  url: string;
+}
+
+export interface TimelineItem<TRenderType extends TimelineItemRenderType>
+  extends TimelineItemBaseArgs {
+  renderType: TRenderType;
+  args: TimelineItemBaseRenderArgs & TimelineItemParamsMap[TRenderType];
+}
+
+export interface TimelineConfig {
+  Icon: LucideIcon;
+  iconColor: string;
 }
