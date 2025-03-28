@@ -4,9 +4,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 
+import { expYears } from '@/config/data';
 import { getSiteConfig } from '@/config/site';
 
-export default function Hero() {
+export default function Hero({ length }: { length: number }) {
   const { scrollY } = useScroll();
   const {
     name,
@@ -69,13 +70,13 @@ export default function Hero() {
           >
             <div className="text-center text-gray-900 dark:text-white">
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                3+
+                {expYears}+
               </p>
               <p className="text-sm text-inherit">Years in Tech</p>
             </div>
             <div className="text-center text-gray-900 dark:text-white">
               <p className="text-3xl font-bold text-gray-900 dark:text-white">
-                2
+                {length}
               </p>
               <p className="text-sm text-inherit">Articles</p>
             </div>

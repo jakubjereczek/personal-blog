@@ -128,12 +128,12 @@ export const courses: Course[] = [
   },
 ].reverse();
 
-export const exp = calculateYearsSince(
+export const { years: expYears, str: expString } = calculateYearsSince(
   experience[0].period.start?.slice(0, 7) ?? '',
 );
 
 export const aboutMe = [
-  `Hi there! I'm Jakub, a passionate software developer with ${exp} commercial experience in web development.`,
+  `Hi there! I'm Jakub, a passionate software developer with ${expString} commercial experience in web development.`,
   'Commercially, I specialize in front-end development, but I’m actively expanding my skills toward full-stack. My interests gravitate toward two languages: JavaScript (including TypeScript) and Go. On the JavaScript front, I’m particularly interested in React, Next.js, Node.js, and Nest.js.',
   'This blog is my platform to share insights, thoughts on (web) development, trends and technologies in general. I created this space to serve as a reflection of my personal growth. I hope you find the content here useful and inspiring. Feel free to reach out if you have any questions.',
 ];

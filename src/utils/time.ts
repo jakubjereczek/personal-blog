@@ -19,7 +19,11 @@ export function calculateYearsSince(period: string) {
     yearsDiff--;
     monthsDiff += 12;
   }
-  return `${yearsDiff} years ${monthsDiff ? `${monthsDiff} months` : ``}`;
+  return {
+    years: yearsDiff,
+    monthsDiff,
+    str: `${yearsDiff} years ${monthsDiff ? `${monthsDiff} months` : ``}`,
+  };
 }
 
 export function formatDate(datestring: string): string {
