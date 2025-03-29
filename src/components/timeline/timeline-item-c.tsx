@@ -30,22 +30,20 @@ function TimelineItemCourse({
           </div>
 
           <div>
-            <div className="flex gap-2">
-              <span className="text-black-600 block font-bold dark:text-white">
-                {item.title}
-              </span>
-              <div className="flex gap-1">
-                {item.args.technologies.map((technology, index) => (
-                  <Tag
-                    key={hashKey(`timeline-${technology.name}-${index}`)}
-                    value={technology.name}
-                    icon={{
-                      Icon: technology.Icon,
-                      colors: technology.colors,
-                    }}
-                  />
-                ))}
-              </div>
+            <span className="text-black-600 block font-bold dark:text-white">
+              {item.title}
+            </span>
+            <div className="flex gap-1 py-2">
+              {item.args.technologies.map((technology, index) => (
+                <Tag
+                  key={hashKey(`timeline-${technology.name}-${index}`)}
+                  value={technology.name}
+                  icon={{
+                    Icon: technology.Icon,
+                    colors: technology.colors,
+                  }}
+                />
+              ))}
             </div>
             <div className="flex gap-4">
               {item.args.duration && (
