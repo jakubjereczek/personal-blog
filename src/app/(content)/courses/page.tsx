@@ -1,5 +1,4 @@
 import { FilterIcon } from 'lucide-react';
-import { SearchParams } from 'next/dist/server/request/search-params';
 import Link from 'next/link';
 
 import CoursesList from '@/components/courses-list';
@@ -13,7 +12,7 @@ import { parseStringToArray, toggleQueryParam } from '@/utils/url';
 export default async function CoursesPage({
   searchParams,
 }: {
-  searchParams: SearchParams;
+  searchParams: Promise<{ technologies?: string; platforms?: string }>;
 }) {
   const { technologies, platforms } = await searchParams;
   const allTechnologies = getDistinctValues(
