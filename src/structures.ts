@@ -14,7 +14,7 @@ interface NavItem {
 export const navItems: NavItem[] = [
   { name: 'Blog', href: '/', Icon: Home },
   { name: 'About me', href: '/about', Icon: User2 },
-  { name: 'Courses', href: 'courses', Icon: Book },
+  { name: 'Courses', href: '/courses', Icon: Book },
 ];
 
 export type ArticleMetadata = {
