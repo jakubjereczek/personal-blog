@@ -24,7 +24,7 @@ function TimelineItemCourse({
       <div>
         <div className="flex gap-2">
           <div
-            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full ${item.args.platform.color}`}
+            className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-${item.args.platform.color}`}
           >
             <item.args.platform.Icon size={24} />
           </div>

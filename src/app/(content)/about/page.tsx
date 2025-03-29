@@ -4,7 +4,7 @@ import { GraduationCap, BriefcaseBusiness } from 'lucide-react';
 
 import AboutMe from '@/components/about-me';
 import ContentTeaser from '@/components/content-teaser';
-import Courses from '@/components/courses';
+import CoursesPreviewList from '@/components/courses-preview-list';
 import Timeline from '@/components/timeline/timeline';
 import { courses, education, experience } from '@/config/data';
 import {
@@ -61,7 +61,7 @@ export default function AboutPage() {
               text="View all"
               link="/courses"
             >
-              <Courses courses={courses} />
+              <CoursesPreviewList courses={courses} />
             </ContentTeaser>
           </div>
         </div>

@@ -110,7 +110,7 @@ export const platforms: { [key in PlatformName]: Platform } = {
   Udemy: {
     name: 'Udemy',
     Icon: SiUdemy,
-    color: 'bg-violet-200',
+    color: 'violet-300',
   },
 };
 

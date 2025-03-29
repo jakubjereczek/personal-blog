@@ -5,7 +5,7 @@ import ItemRenderer from '@/components/item-renderer';
 import { Course } from '@/structures';
 import { hashKey } from '@/utils/string';
 
-function Courses({ courses }: { courses: Course[] }) {
+function CoursesPreviewList({ courses }: { courses: Course[] }) {
   return (
     <div className="flex flex-wrap gap-2">
       <ItemRenderer<Course>
@@ -19,4 +19,4 @@ function Courses({ courses }: { courses: Course[] }) {
   );
 }
 
-export default Courses;
+export default CoursesPreviewList;

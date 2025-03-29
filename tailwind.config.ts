@@ -16,6 +16,9 @@ export default {
     {
       pattern: /text-\w{1,}/,
     },
+    {
+      pattern: /bg-\w{1,}/,
+    },
   ],
   plugins: [],
   darkMode: 'class',
