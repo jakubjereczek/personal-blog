@@ -1,12 +1,13 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { GraduationCap, BriefcaseBusiness } from 'lucide-react';
 
-import AboutMe from '@/components/about-me';
 import ContentTeaser from '@/components/content-teaser';
-import CoursesPreviewList from '@/components/courses-preview-list';
+import CoursesPreviewList from '@/components/courses/courses-preview-list';
 import Timeline from '@/components/timeline/timeline';
-import { courses, education, experience } from '@/config/data';
+import { aboutMe, courses, education, experience } from '@/config/data';
+import { hashKey } from '@/utils/string';
 import {
   mapEducationToTimelineItem,
   mapExperienceToTimelineItem,
@@ -19,7 +20,20 @@ export default function AboutPage() {
       <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-gray-200">
         About me
       </h2>
-      <AboutMe />
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.2 }}
+      >
+        {aboutMe.map((payload, index) => (
+          <p
+            key={hashKey(`about-me-${index}`)}
+            className="mb-4 text-gray-600 dark:text-gray-400"
+          >
+            {payload}
+          </p>
+        ))}
+      </motion.div>{' '}
       <div className="mt-12">
         <h2 className="mb-4 text-2xl font-semibold text-gray-900 dark:text-white">
           Experience & education

@@ -2,7 +2,7 @@
 
 import React, { useCallback, useState } from 'react';
 
-import { Heading } from '@/components/article-content';
+import { Heading } from '@/components/articles/article-content';
 import { hashKey } from '@/utils/string';
 
 export default function TableOfContents({ headings }: { headings: Heading[] }) {

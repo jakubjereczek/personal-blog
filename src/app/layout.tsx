@@ -1,7 +1,7 @@
 import { Metadata, Viewport } from 'next';
 
 import './global.css';
-import Navigation from '@/components/navigation';
+import Navigation from '@/components/navigation/navigation';
 import { getSeoMetadata, metaTags } from '@/config/seo';
 import { hashKey } from '@/utils/string';
 

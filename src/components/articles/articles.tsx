@@ -1,4 +1,4 @@
-import ArticleCard from '@/components/article-card';
+import ArticleCard from '@/components/articles/article-card';
 import ItemRenderer from '@/components/item-renderer';
 import { Article } from '@/structures';
 import { hashKey } from '@/utils/string';

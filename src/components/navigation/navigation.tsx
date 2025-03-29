@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 import { useState, useRef } from 'react';
 
-import NavLink from '@/components/navigation-item';
-import NavItemMenu from '@/components/navigation-item-menu';
-import NavItemTheme from '@/components/navigation-item-theme';
+import NavLink from '@/components/navigation/navigation-item';
+import NavItemMenu from '@/components/navigation/navigation-item-menu';
+import NavItemTheme from '@/components/navigation/navigation-item-theme';
 import { useClickOutside, useDark, useScrollVisibility } from '@/hooks';
 import { navItems } from '@/structures';
 import { hashKey } from '@/utils/string';

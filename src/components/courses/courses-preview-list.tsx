@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CoursePreview from '@/components/course-preview';
+import CoursePreview from '@/components/courses/course-preview';
 import ItemRenderer from '@/components/item-renderer';
 import { Course } from '@/structures';
 import { hashKey } from '@/utils/string';

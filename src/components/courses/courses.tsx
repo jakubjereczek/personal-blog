@@ -4,8 +4,8 @@ import { FilterIcon } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
-import CoursesList from '@/components/courses-list';
-import CoursesProgressBar from '@/components/courses-progress-bar';
+import CoursesList from '@/components/courses/courses-list';
+import CoursesProgressBar from '@/components/courses/courses-progress-bar';
 import Tag from '@/components/tag';
 import { courses as allCourses } from '@/config/data';
 import { getDistinctValues } from '@/utils/array';

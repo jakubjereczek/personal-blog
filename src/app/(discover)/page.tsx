@@ -1,4 +1,4 @@
-import Articles from '@/components/articles';
+import Articles from '@/components/articles/articles';
 import { getSiteConfig } from '@/config/site';
 import ArticleService from '@/lib/article-service';
 import { Article, navItems } from '@/structures';

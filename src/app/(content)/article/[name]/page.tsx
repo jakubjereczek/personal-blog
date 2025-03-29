@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
-import ArticleContent from '@/components/article-content';
+import ArticleContent from '@/components/articles/article-content';
 import MDXRemoteRenderer from '@/components/mdx-remote-renderer';
 import { getSiteConfig } from '@/config/site';
 import ArticleService from '@/lib/article-service';

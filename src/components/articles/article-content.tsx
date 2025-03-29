@@ -2,22 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-import TableOfContents from '@/components/article-table-of-contents';
+import TableOfContents from '@/components/articles/article-table-of-contents';
 
 export interface Heading {
   id: string;
   title: string;
   level: number;
-}
-
-function processHeadings(elements: NodeListOf<Element>): Heading[] {
-  return Array.from(elements).map((heading) => {
-    const level = Number.parseInt(heading.tagName[1]);
-    const title = heading.textContent || '';
-    const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    heading.id = id;
-    return { id, title, level };
-  });
 }
 
 export default function ArticleContent({
@@ -30,8 +20,17 @@ export default function ArticleContent({
 
   useEffect(() => {
     if (ref.current) {
-      const elements = ref.current.querySelectorAll('h1, h2, h3, h4, h5, h6');
-      setHeadings(processHeadings(elements));
+      setHeadings(
+        Array.from(ref.current.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(
+          (heading) => {
+            const level = Number.parseInt(heading.tagName[1]);
+            const title = heading.textContent || '';
+            const id = title.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+            heading.id = id;
+            return { id, title, level };
+          },
+        ),
+      );
     }
   }, []);
 
