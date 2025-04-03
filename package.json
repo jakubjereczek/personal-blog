@@ -13,7 +13,8 @@
     "test": "",
     "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx}\"",
     "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "create_article": "sh ./sh/create_article.sh"
   },
   "dependencies": {
     "@next/mdx": "^15.1.6",
