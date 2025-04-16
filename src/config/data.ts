@@ -1,4 +1,5 @@
 import {
+  SiGo,
   SiJavascript,
   SiNextdotjs,
   SiReact,
@@ -79,7 +80,12 @@ export const education: Education[] = [
   },
 ].reverse();
 
-export type TechnologyName = 'JavaScript' | 'TypeScript' | 'Next' | 'React';
+export type TechnologyName =
+  | 'JavaScript'
+  | 'TypeScript'
+  | 'Next'
+  | 'React'
+  | 'Go';
 
 export type PlatformName = 'Udemy';
 
@@ -104,6 +110,11 @@ export const technologies: { [key in TechnologyName]: Technology } = {
     Icon: SiReact,
     colors: ['blue-400'],
   },
+  Go: {
+    name: 'Golang',
+    Icon: SiGo,
+    colors: ['blue-600'],
+  },
 };
 
 export const platforms: { [key in PlatformName]: Platform } = {
@@ -124,6 +135,18 @@ export const courses: Course[] = [
     duration: 1160,
     platform: platforms.Udemy,
     certificateUrl: '',
+    courseUrl: 'https://www.udemy.com/course/nextjs-react-the-complete-guide/',
+  },
+  {
+    title: 'Go - The Complete Guide',
+    description:
+      'I learned Go programming from the ground up, covering everything from basic syntax to advanced concepts like goroutines, channels, interfaces, and data structures. I built several practical projects, including a complete REST API with authentication and SQL database integration.',
+    finishedAt: '2025-04-16T08:00:00',
+    technologies: [technologies.Go],
+    duration: 930,
+    platform: platforms.Udemy,
+    certificateUrl:
+      'https://www.udemy.com/certificate/UC-c033057d-273d-408d-8e4d-d8ada130e5ba/',
     courseUrl: 'https://www.udemy.com/course/nextjs-react-the-complete-guide/',
   },
 ].reverse();
