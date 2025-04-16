@@ -147,7 +147,7 @@ export const courses: Course[] = [
     platform: platforms.Udemy,
     certificateUrl:
       'https://www.udemy.com/certificate/UC-c033057d-273d-408d-8e4d-d8ada130e5ba/',
-    courseUrl: 'https://www.udemy.com/course/nextjs-react-the-complete-guide/',
+    courseUrl: 'https://www.udemy.com/course/go-the-complete-guide/',
   },
 ].reverse();
 

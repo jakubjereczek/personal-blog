@@ -1,0 +1,107 @@
+---
+title: 'Bundle optimization'
+description: 'Practical steps to significantly reduce the bundle size and improve the load performance.'
+date: '2025-04-16T18:45:00Z'
+author: 'Jakub Jereczek'
+tags:
+  - Performacne 
+  - Bundle
+  - Tree Shaking
+  - Lazy loading
+  - SPA
+---
+
+# Speed up initial loading
+
+Recently I have been working on a task where the goal was to speed up the initial loading of single-page application. As SPA typically load a large amount of code upfront the key to the success was was reducing the total size of the code generated during the build. 
+
+Success! Here are the results:
+- The bundle size has been reduced by 45%,
+- The initial bundle is now several times smaller than before.
+
+So, how was this achieved?
+
+## Golden rules
+
+### Use dynamic imports if possible
+
+Dynamic import allows modules to be loaded at runtime. It creates separate chunks in the bundler. Pay attention to the packages you don't need during the initial load of your application. For example, if you're using a library like Three.js (~500 KB) and it's not required right away, consider importing it dynamically only when it's actually needed.
+
+```ts
+useEffect(() => {
+  const initializeScene = async () => {
+    const {
+      Scene,
+      PerspectiveCamera,
+      WebGLRenderer,
+      PlaneGeometry,
+      MeshBasicMaterial,
+      Mesh,
+    } = await import('three');
+
+    const scene = new Scene();
+    const geometry = new PlaneGeometry(1, 1);
+    // (...)
+  };
+
+  initializeScene();
+}, []);
+
+```
+
+### Take care of lazy-loading
+
+Lazy-loading is more than just dynamic imports — it's a strategy. Many modern frameworks support things like dynamic imports or code splitting based on routes or components — but not always. Pay attention to whether lazy-loading is properly implemented in your application. Leveraging code-splitting and chunking mechanisms can significantly reduce your initial bundle size.
+
+For example, React provides a special lazy function that allows you to defer loading of a component until it's actually needed. The bundler recognizes the dynamic import and creates a separate chunk that doesn't go into the main bundle.
+
+```tsx
+import React, { Suspense } from 'react';
+
+const LazyComponent = React.lazy(() => import('./Comp'));
+
+function App() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+```
+
+### Use minified external packages
+
+You don't always need the full package. Many libraries offer a lightweight core version that allows you to add only the plugins/modules you actually need.
+```ts
+// Package with all available features
+import Chart from 'chart.js/auto'
+
+// Lightweight core version 
+import { Chart, BarController, BarElement } from 'chart.js'
+Chart.register(BarController, BarElement)
+
+```
+
+* Whenever possible, use the minified version (.min.js) of a package — especially if it's not included by default. This can significantly reduce your bundle size.
+```
+import Package from 'package/dist/pack.min.js'
+```
+
+* Light imports
+
+Pay attention to the size of the packages you import. Sometimes, it's just not worth it. 
+Importing large packages just to use a tiny part of them often makes no sense. If you're only using a small piece — like a single function you could easily write yourself — it's probably not worth the extra weight.
+In VS Code, I use the Import Cost plugin, which shows the size of imported packages directly in the editor.
+
+```ts
+import { isNil } from 'ramda' // 452 (gzipped: 285)
+```
+
+### Proper configuration is key
+
+Depending on the bundler, it provides a wide range of configuration options to fine-tune performance and optimize the output. Review your project configuration and adjust it to the most appropriate one.
+
+Compression, minification, and chunking are key strategies worth considering when aiming to effectively reduce bundle size.
+
+Most bundlers also provide analysis tools that help you inspect the structure of your final build — how files are chunked, what contributes to overall bundle size, and more.
+
