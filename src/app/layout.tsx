@@ -1,6 +1,7 @@
 import { Metadata, Viewport } from 'next';
 
 import './global.css';
+import Footer from '@/components/footer';
 import Navigation from '@/components/navigation/navigation';
 import { getSeoMetadata, metaTags } from '@/config/seo';
 import { hashKey } from '@/utils/string';
@@ -30,11 +31,7 @@ export default function RootLayout({
         <div className="flex min-h-screen flex-col bg-white selection:bg-blue-600 selection:text-blue-100 dark:bg-gray-900 dark:selection:bg-blue-400">
           <Navigation />
           {children}
-          <footer className="bg-gray-100 dark:bg-gray-800">
-            <div className="mx-auto max-w-4xl px-4 py-4 text-center text-gray-600 dark:text-gray-400">
-              <p>&copy; All rights reserved.</p>
-            </div>
-          </footer>
+          <Footer />
         </div>
       </body>
     </html>
