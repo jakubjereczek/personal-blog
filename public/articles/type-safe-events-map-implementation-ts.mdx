@@ -1,0 +1,113 @@
+---
+title: 'Type-safe Events Map implementation'
+description: 'Strongly typed events map using TypeScript.'
+date: '2025-05-09T15:00:00Z'
+author: 'Jakub Jereczek'
+tags:
+  - TypeScript
+---
+
+# Strongly-Typed Event Map
+
+## Event Map Typing
+
+Event maps are used to accurately predict events and their payloads. They help match an event name with the correct data type. Common uses include analytics (e.g., sending events), event emitters, or logging features.
+
+Event maps are helpful when it's important to maintain data consistency and avoid mistakes by developers.
+
+In this article, I will show you how to create a type-safe Event Map in TypeScript. By using constructs such as mapped types, literal types, and type inference, we gain full control over the structure of the data sent to the event handler function.
+
+## Implementing Event Map in TypeScript
+
+```ts 
+// Representing all possible data that can be part of any event
+interface EventProperty {
+  id: string;
+  position: number;
+  name: string;
+  type: string;
+  state: string;
+  duration: number;
+  quality: 'sd' | 'hd' | 'fhd' | 'uhd';
+  volume: number;
+  userId: string;
+}
+
+// Representing all possible events
+enum EventName {
+  Info = 'info',
+  Play = 'play',
+  Resume = 'resume',
+  Pause = 'pause',
+  Stop = 'stop',
+  Buffering = 'buffering',
+  Seek = 'seek',
+}
+
+// This is a map that assigns an array of keys from EventProperty for each event type, specifying which properties should be used
+type EventParamsMap = {
+  [P in EventName]: readonly (keyof EventProperty)[];
+};
+
+// Static implementation of EventParamsMap. Contains information about what properties are needed for a given event
+const eventParamsMap = {
+  [EventName.Info]: ['id', 'name', 'state'],
+  [EventName.Play]: ['id', 'position', 'state', 'volume', 'quality'],
+  [EventName.Resume]: ['id', 'position', 'state', 'volume'],
+  [EventName.Pause]: ['id', 'state'],
+  [EventName.Stop]: ['id', 'position', 'duration'],
+  [EventName.Buffering]: ['id', 'position', 'state'],
+  [EventName.Seek]: ['id', 'position', 'userId'],
+} satisfies EventParamsMap;
+
+// The EventNameProperties<T> and EventPayloadProperties<T> constructs dynamically build the type of the property object that must be passed to the sendEvent function
+type EventNameProperties<T extends EventName> =
+  (typeof eventParamsMap)[T][number];
+
+export type EventPayloadProperties<
+  T extends EventName
+> = { [K in EventNameProperties<T>]: EventProperty[K] };
+
+// Final function
+function sendEvent<TEvent extends EventName>(
+  event: TEvent,
+  properties: EventPayloadProperties<TEvent>
+) {
+  // Code responsible for data handling...
+  // e.g. HttpService.sendEvent(event, properties)
+}
+
+// An examples:
+sendEvent(EventName.Play, {
+  id: 'movie-001',
+  position: 0,
+  state: 'playing',
+  volume: 85,
+  quality: 'fhd',
+});
+
+sendEvent(EventName.Resume, {
+  id: 'movie-001',
+  position: 150,
+  state: 'playing',
+  volume: 80,
+});
+
+sendEvent(EventName.Pause, {
+  id: 'movie-001',
+  state: 'paused',
+});
+
+sendEvent(EventName.Buffering, {
+  id: 'movie-001',
+  position: 200,
+  state: 'buffering',
+});
+
+sendEvent(EventName.Seek, {
+  id: 'movie-001',
+  position: 560,
+  userId: 'user-789',
+});
+
+```
