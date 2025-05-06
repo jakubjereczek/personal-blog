@@ -69,7 +69,7 @@ export default function AboutPage() {
           <div className="py-4">
             <ContentTeaser
               // TODO: when more than 2 courses appear update the value
-              maxHeight={70}
+              maxHeight={150}
               title="Discover more..."
               description="Explore the full list of courses I have completed, along with detailed metadata and insights. Visit the Courses subpage to see my learning journey since I created this personal page."
               text="View all"
