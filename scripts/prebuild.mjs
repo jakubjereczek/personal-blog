@@ -5,6 +5,8 @@ import matter from 'gray-matter';
 import sharp from 'sharp';
 
 const MAX_LENGTH = 24;
+const HEIGHT = 630;
+const WIDTH = 1200;
 
 function splitText(text) {
   const words = text.split(' ');
@@ -37,7 +39,7 @@ function generateBuffer(dark, titles) {
   const textColor = dark ? '#e2e8f0' : '#64748b';
 
   return Buffer.from(`
-    <svg viewBox="0 0 2400 1260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" width="2400" height="1260">
+    <svg viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" width="${WIDTH}" height="${HEIGHT}">
       <defs>
         <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stop-color="${backgroundGradientStart}" />
@@ -61,15 +63,15 @@ function generateBuffer(dark, titles) {
 
       <rect width="100%" height="100%" fill="url(#grad)" />
       <rect width="100%" height="100%" fill="url(#dots)" opacity="0.1" />
-      <g transform="translate(1200, 400)">
-        <text x="0" y="0" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="96px" letter-spacing="0.05em" fill="${textColor}">
+      <g transform="translate(600, 200)">
+        <text x="0" y="0" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="48px" letter-spacing="0.05em" fill="${textColor}">
           A closer look at...
         </text>
-        <text x="0" y="192px" text-anchor="middle" fill="url(#textGrad)" filter="url(#glow)" font-family="Roboto, Arial, sans-serif" font-size="168px" font-weight="bold" letter-spacing="0.02em" style="text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+        <text x="0" y="96px" text-anchor="middle" fill="url(#textGrad)" filter="url(#glow)" font-family="Roboto, Arial, sans-serif" font-size="84px" font-weight="bold" letter-spacing="0.02em" style="text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);">
           <tspan x="0" dy="0">${titles[0]}</tspan>
-          <tspan x="0" dy="168px">${titles[1]}</tspan>
+          <tspan x="0" dy="84px">${titles[1]}</tspan>
         </text>
-        <text x="0" y="520" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="64px" letter-spacing="0.05em" fill="${textColor}" opacity="0.7">
+        <text x="0" y="260" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="32px" letter-spacing="0.05em" fill="${textColor}" opacity="0.7">
           jakubjereczek.com
         </text>
       </g>
@@ -80,14 +82,14 @@ function generateBuffer(dark, titles) {
 function generateImage(filename, buffer) {
   sharp({
     create: {
-      width: 2400,
-      height: 1260,
+      width: 1200,
+      height: 630,
       channels: 4,
       background: { r: 0, g: 0, b: 0, alpha: 0 },
     },
   })
     .composite([{ input: buffer, top: 0, left: 0 }])
-    .png({ quality: 100, compressionLevel: 0, adaptiveFiltering: true })
+    .png({ quality: 100, compressionLevel: 3, adaptiveFiltering: true })
     .toFile(
       path.join(process.cwd(), `public/articles/images/${filename}.png`),
       (err, info) => {
