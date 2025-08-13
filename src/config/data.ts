@@ -18,7 +18,7 @@ import { calculateYearsSince } from '@/utils/time';
 
 export const experience: Experience[] = [
   {
-    period: { start: '07.2021', finished: 'now' },
+    period: { start: '07.2021', finished: '08.2025' },
     company: 'OKE Software',
     companyUrl: 'https://oke.pl/',
     location: 'Gdańsk / Remote',
@@ -50,6 +50,15 @@ export const experience: Experience[] = [
       'Confluence',
       'Teamwork',
     ],
+  },
+  {
+    period: { start: '08.2025', finished: 'now' },
+    company: 'NAVBLUE',
+    companyUrl: 'https://www.navblue.aero/',
+    location: 'Gdańsk',
+    role: 'Frontend developer',
+    description: 'Software for the aviation industry.',
+    highlights: [],
   },
 ].reverse();
 
