@@ -161,7 +161,7 @@ export const courses: Course[] = [
 ].reverse();
 
 export const { years: expYears, str: expString } = calculateYearsSince(
-  experience.at(-1).period.start?.slice(0, 7) ?? '',
+  experience.at(-1)?.period.start?.slice(0, 7) ?? '',
 );
 
 export const aboutMe = [
