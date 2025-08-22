@@ -169,7 +169,7 @@ export const courses: Course[] = [
     title: 'Gherkin Language - The Master Guide',
     description:
       'I learned how to write Behaviour Driven Development (BDD) requirements and tests using the Gherkin language with Cucumber. I covered all Gherkin keywords and syntax, practiced structuring feature files with scenarios, backgrounds, and step definitions, and improved existing test cases through refactoring exercises.',
-    finishedAt: '2025-04-16T16:00:00',
+    finishedAt: '2025-08-22T16:00:00',
     technologies: [technologies.Gherkin],
     duration: 332,
     platform: platforms.Udemy,
