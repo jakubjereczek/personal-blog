@@ -1,4 +1,5 @@
 import {
+  SiCucumber,
   SiGo,
   SiJavascript,
   SiNextdotjs,
@@ -94,7 +95,8 @@ export type TechnologyName =
   | 'TypeScript'
   | 'Next'
   | 'React'
-  | 'Go';
+  | 'Go'
+  | 'Gherkin';
 
 export type PlatformName = 'Udemy';
 
@@ -123,6 +125,11 @@ export const technologies: { [key in TechnologyName]: Technology } = {
     name: 'Golang',
     Icon: SiGo,
     colors: ['blue-600'],
+  },
+  Gherkin: {
+    name: 'Gherkin',
+    Icon: SiCucumber,
+    colors: ['green-400']
   },
 };
 
@@ -157,6 +164,18 @@ export const courses: Course[] = [
     certificateUrl:
       'https://www.udemy.com/certificate/UC-c033057d-273d-408d-8e4d-d8ada130e5ba/',
     courseUrl: 'https://www.udemy.com/course/go-the-complete-guide/',
+  },
+  {
+    title: 'Gherkin Language - The Master Guide',
+    description:
+      'I learned how to write Behaviour Driven Development (BDD) requirements and tests using the Gherkin language with Cucumber. I covered all Gherkin keywords and syntax, practiced structuring feature files with scenarios, backgrounds, and step definitions, and improved existing test cases through refactoring exercises.',
+    finishedAt: '2025-04-16T16:00:00',
+    technologies: [technologies.Gherkin],
+    duration: 332,
+    platform: platforms.Udemy,
+    certificateUrl:
+      'https://www.udemy.com/certificate/UC-3d952cf6-f933-43cd-8e97-e31871494193/',
+    courseUrl: 'https://www.udemy.com/course/gherkin-language-the-master-guide/',
   },
 ].reverse();
 
